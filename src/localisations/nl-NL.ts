@@ -1,0 +1,23 @@
+export default {
+  TrafficSignal: "Verkeerslicht",
+  Vanilla: "Vanilla",
+  SplitPhasing: "Splitfasering",
+  AdvancedSplitPhasing: "Geavanceerde Splitfasering",
+  ProtectedRightTurns: "Beschermd rechts afslaan",
+  ProtectedLeftTurns: "Beschermd links afslaan",
+  Options: "Opties",
+  ExclusivePedestrianPhase: "Exclusieve Voetgangersfase",
+  AlwaysGreenLeftTurns: "Altijd Groen Linksaf",
+  AlwaysGreenRightTurns: "Altijd Groen Rechtsaf",
+  LaneDirectionTool: "Rijstrook Richting Tool (Experimenteel)",
+  Close: "Sluit",
+  Open: "Open",
+  Reset: "Reset",
+  Save: "Opslaan",
+  PleaseSave: "Sla de wijzigingen op voordat u een andere kruising selecteert",
+  PleaseSelectJunction: "Selecteer een kruising",
+  Left: "Links",
+  Ahead: "Rechtdoor",
+  Right: "Rechts",
+  UTurn: "U-bocht"
+};
