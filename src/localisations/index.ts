@@ -1,5 +1,6 @@
 import deDE from "./de-DE";
 import enUS from "./en-US";
+import esES from "./es-ES";
 import frFR from "./fr-FR";
 import jaJP from "./ja-JP";
 import koKR from "./ko-KR";
@@ -21,6 +22,7 @@ const cultures: {[key: string]: string[]} = {
 const localisations: {[key: string]: {[key: string]: string}} = {
   "de-DE": deDE,
   "en-US": enUS,
+  "es-ES": esES,
   "fr-FR": frFR,
   "ja-JP": jaJP,
   "ko-KR": koKR,
