@@ -14,14 +14,14 @@ export default {
   Open: "Abrir",
   Reset: "Redefinir",
   Save: "Salvar",
-  PleaseSave: "Por favor, salve as alterações antes de selecionar outra junção.",
-  PleaseSelectJunction: "Por favor, selecione uma junção",
+  PleaseSave: "Por favor, salve as alterações antes de selecionar outra cruzamento.",
+  PleaseSelectJunction: "Por favor, selecione uma cruzamento",
   Left: "À Esquerda",
   Ahead: "À Frente",
   Right: "À Direita",
-  UTurn: "Conversão em U",
-  GiveWayToOncomingVehicles: "Give Way to Oncoming Vehicles",
-  CustomPedestrianDurationMultiplier: "Pedestrian Phase Duration",
+  UTurn: "Retorno",
+  GiveWayToOncomingVehicles: "Prioridade aos veículos se aproximando",
+  CustomPedestrianDurationMultiplier: "Duração da fase dos Pedestres",
   CustomPedestrianDurationMultiplierSuffix: "x",
-  AllowTurningOnRed: "Allow Turning on Red"
+  AllowTurningOnRed: "Permitir Conversão no Vermelho"
 };
