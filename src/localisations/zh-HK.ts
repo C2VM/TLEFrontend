@@ -23,5 +23,6 @@ export default {
   GiveWayToOncomingVehicles: "讓路給迎面駛來的車輛",
   CustomPedestrianDurationMultiplier: "行人過路時段長短",
   CustomPedestrianDurationMultiplierSuffix: "倍",
-  AllowTurningOnRed: "容許於紅燈時轉彎"
+  AllowTurningOnRed: "容許於紅燈時轉彎",
+  CanaryBuildWarning: "請注意，你正在使用Canary版。此版本僅供測試之用，很可能會導致遊戲崩潰或存檔損壞。敬請避免使用此版本進行遊戲。"
 };
