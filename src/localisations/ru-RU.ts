@@ -20,9 +20,9 @@ export default {
   Ahead: "Прямо",
   Right: "Направо",
   UTurn: "Разворот",
-  GiveWayToOncomingVehicles: "Give Way to Oncoming Vehicles",
-  CustomPedestrianDurationMultiplier: "Pedestrian Phase Duration",
-  CustomPedestrianDurationMultiplierSuffix: "x",
-  AllowTurningOnRed: "Allow Turning on Red",
-  CanaryBuildWarning: "Please note that you are using a canary build, which is more likely to contain game-breaking or save-breaking bugs and is strictly for playtesting only. DO NOT use this build for normal gameplay."
+  GiveWayToOncomingVehicles: "Уступить дорогу встречному транспорту",
+  CustomPedestrianDurationMultiplier: "Продолжительность фазы для пешеходов",
+  CustomPedestrianDurationMultiplierSuffix: "⨯",
+  AllowTurningOnRed: "Разрешить поворот на красный свет",
+  CanaryBuildWarning: "Обратите внимание, что вы используете тестовую сборку, которая может содержать ошибки, нарушающие игровой процесс или может повредить сохранение, и предназначена исключительно для тестирования. НЕ используйте эту сборку для обычной игры."
 };

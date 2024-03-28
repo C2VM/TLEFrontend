@@ -20,9 +20,9 @@ export default {
   Ahead: "직진",
   Right: "우회전",
   UTurn: "유턴",
-  GiveWayToOncomingVehicles: "Give Way to Oncoming Vehicles",
-  CustomPedestrianDurationMultiplier: "Pedestrian Phase Duration",
+  GiveWayToOncomingVehicles: "회전 차량 우선 양보(바닐라 신호만 해당)",
+  CustomPedestrianDurationMultiplier: "보행 신호 지속 시간",
   CustomPedestrianDurationMultiplierSuffix: "x",
-  AllowTurningOnRed: "Allow Turning on Red",
-  CanaryBuildWarning: "Please note that you are using a canary build, which is more likely to contain game-breaking or save-breaking bugs and is strictly for playtesting only. DO NOT use this build for normal gameplay."
+  AllowTurningOnRed: "적신호시 우회전(우측통행 기준) 허용",
+  CanaryBuildWarning: "canary build 사용 전 유의사항, 해당 빌드는 테스트 전용이므로 저장 파일이 망가지거나 버그가 발생 할 수 있습니다. 일반적인 경우에는 사용하지 마십시오."
 };
