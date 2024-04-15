@@ -19,10 +19,10 @@ export default {
   Left: "Gauche",
   Ahead: "En face",
   Right: "Droite",
-  UTurn: "Demi tour",
-  GiveWayToOncomingVehicles: "Give Way to Oncoming Vehicles",
-  CustomPedestrianDurationMultiplier: "Pedestrian Phase Duration",
+  UTurn: "Demi-tour",
+  GiveWayToOncomingVehicles: "Céder le passage aux véhicules venant en sens inverse",
+  CustomPedestrianDurationMultiplier: "Durée du feu exclusif aux piétons",
   CustomPedestrianDurationMultiplierSuffix: "x",
-  AllowTurningOnRed: "Allow Turning on Red",
-  CanaryBuildWarning: "Please note that you are using a canary build, which is more likely to contain game-breaking or save-breaking bugs and is strictly for playtesting only. DO NOT use this build for normal gameplay."
+  AllowTurningOnRed: "Autoriser les virages lorsque le feu est rouge",
+  CanaryBuildWarning: "Veuillez noter que vous utilisez une version nouvellement compilée qui n'a pas été soigneusement testée. Ce mode est donc plus susceptible de contenir des bugs cassant le jeu ou votre sauvegarde, et il est strictement réservé aux tests de jeu. NE PAS utiliser cette version pour le jeu normal."
 };
