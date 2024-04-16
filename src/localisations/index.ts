@@ -5,6 +5,7 @@ import frFR from "./fr-FR";
 import jaJP from "./ja-JP";
 import koKR from "./ko-KR";
 import nlNL from "./nl-NL";
+import plPL from "./pl-PL";
 import ptBR from "./pt-BR";
 import ruRU from "./ru-RU";
 import zhHANS from "./zh-HANS";
@@ -27,6 +28,7 @@ const localisations: {[key: string]: {[key: string]: string}} = {
   "ja-JP": jaJP,
   "ko-KR": koKR,
   "nl-NL": nlNL,
+  "pl-PL": plPL,
   "pt-BR": ptBR,
   "ru-RU": ruRU,
   "zh-HANS": zhHANS,
