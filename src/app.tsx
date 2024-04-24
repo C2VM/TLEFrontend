@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { LocaleContext } from "./context";
 import { engineCall, isEngine } from "./engine";
-import { cultures, defaultLocale } from "./localisations";
+import { defaultLocale } from "./localisations";
 
 import MainPanel from "./components/main-panel";
 import LaneDirectionTool from "./components/lane-direction-tool";
@@ -11,24 +11,17 @@ export default function App() {
   const [locale, setLocale] = useState(defaultLocale);
   const [ldtOpenedPanel, setLdtOpenedPanel] = useState(-1);
 
-  const updateLocale = async () => {
-    const callResult = await engineCall("C2VM-TLE-Call-GetLocale");
-    if (callResult) {
-      const result = JSON.parse(callResult);
-      if (result.locale) {
-        if (result.locale in cultures && cultures[result.locale].includes(result.culture)) {
-          setLocale(result.culture);
-        } else {
-          setLocale(result.locale);
-        }
-      }
+  const updateLocale = async (result : string) => {
+    const newLocale = JSON.parse(result);
+    if (newLocale.locale) {
+      setLocale(newLocale.locale);
     }
   };
 
   useEffect(() => {
-    updateLocale();
     if ("engine" in window && isEngine(window.engine)) {
-      const listener = window.engine.on("l10n.activeDictionaryChanged.update", (_result) => updateLocale());
+      const listener = window.engine.on("C2VM-TLE-Event-UpdateLocale", (result) => updateLocale(result));
+      engineCall("C2VM-TLE-Call-UpdateLocale");
       return () => {
         listener.clear();
       };

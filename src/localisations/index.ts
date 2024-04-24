@@ -2,6 +2,7 @@ import deDE from "./de-DE";
 import enUS from "./en-US";
 import esES from "./es-ES";
 import frFR from "./fr-FR";
+import itIT from "./it-IT";
 import jaJP from "./ja-JP";
 import koKR from "./ko-KR";
 import nlNL from "./nl-NL";
@@ -15,16 +16,12 @@ import zhTW from "./zh-TW";
 
 const defaultLocale = "en-US";
 
-const cultures: {[key: string]: string[]} = {
-  "en-US": ["nl-NL"],
-  "zh-HANT": ["zh-HK", "zh-TW"]
-};
-
 const localisations: {[key: string]: {[key: string]: string}} = {
   "de-DE": deDE,
   "en-US": enUS,
   "es-ES": esES,
   "fr-FR": frFR,
+  "it-IT": itIT,
   "ja-JP": jaJP,
   "ko-KR": koKR,
   "nl-NL": nlNL,
@@ -51,7 +48,6 @@ const getString = (locale: string, key: string) => {
 }
 
 export {
-  cultures,
   defaultLocale,
   getString,
   localisations

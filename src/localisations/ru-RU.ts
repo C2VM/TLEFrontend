@@ -1,8 +1,8 @@
 export default {
   TrafficSignal: "Светофор",
-  Vanilla: "Ванилла",
-  SplitPhasing: "Раздельная пропуск",
-  AdvancedSplitPhasing: "Продвинутая раздельная пропуск",
+  Vanilla: "По умолчанию",
+  SplitPhasing: "Очередь",
+  AdvancedSplitPhasing: "Продвинутая очередь",
   ProtectedRightTurns: "Защищенные правые повороты",
   ProtectedLeftTurns: "Защищенные левые повороты",
   Options: "Настройки",
