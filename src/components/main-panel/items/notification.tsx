@@ -30,17 +30,19 @@ const Label = styled.div`
 export default function Notification(props: MainPanelItemNotification) {
   const locale = useContext(LocaleContext);
   return (
-    props.notificationType == "warning" &&
-    <Warning>
-      <Image src="Media/Game/Icons/AdvisorNotifications.svg" />
-      <Label>{getString(locale, props.label)}</Label>
-      <style>
-        {`@keyframes c2vm-tle-notification-warning {
-          to {
-            background-color: rgba(200, 0, 0, 0.5);
-          }
-        }`}
-      </style>
-    </Warning>
+    <>
+      {props.notificationType == "warning" &&
+      <Warning>
+        <Image src="Media/Game/Icons/AdvisorNotifications.svg" />
+        <Label>{getString(locale, props.label)}</Label>
+        <style>
+          {`@keyframes c2vm-tle-notification-warning {
+            to {
+              background-color: rgba(200, 0, 0, 0.5);
+            }
+          }`}
+        </style>
+      </Warning>}
+    </>
   );
 }

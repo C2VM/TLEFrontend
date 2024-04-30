@@ -1,6 +1,7 @@
 interface MainPanel {
   title: string,
   image: string,
+  shouldShowPanel: boolean,
   items: MainPanelItem[]
 }
 

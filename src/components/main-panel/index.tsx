@@ -8,6 +8,7 @@ import { engineCall, useEngineOn } from '@/engine';
 const defaultPanel = {
   title: "",
   image: "",
+  shouldShowPanel: false,
   items: []
 };
 
@@ -21,6 +22,7 @@ const useMainPanel = () => {
     setPanel({
       title: newPanel.title ?? defaultPanel.title,
       image: newPanel.image ?? defaultPanel.image,
+      shouldShowPanel: newPanel.shouldShowPanel ?? defaultPanel.shouldShowPanel,
       items: newPanel.items ?? defaultPanel.items
     });
   }, [result]);
@@ -31,8 +33,8 @@ const useMainPanel = () => {
 const Container = styled.div`
   width: 330rem;
   position: absolute;
-  top: calc(10rem + var(--floatingToggleSize) + 6rem);
-  left: 10rem;
+  top: calc(10rem + var(--floatingToggleSize));
+  left: 0rem;
 `;
 
 export default function MainPanel() {
@@ -47,26 +49,18 @@ export default function MainPanel() {
   const panel = useMainPanel();
 
   useEffect(() => {
-    const config = { attributes: true, childList: true, subtree: true };
-    const callback = (_mutationList: MutationRecord[], _observer: MutationObserver) => {
-      const img = document.querySelector("button.selected.item_KJ3.item-hover_WK8.item-active_Spn > img") as HTMLImageElement;
-      if (img && img.src == "Media/Game/Icons/TrafficLights.svg") {
-        setShowPanel(true);
-      } else if (showPanel) {
-        setShowPanel(false);
-        engineCall("C2VM-TLE-Call-MainPanel-Save", "{}");
-      }
-    };
-    const observer = new MutationObserver(callback);
-    observer.observe(document.body, config);
-    return () => observer.disconnect();
-  }, [showPanel]);
-
-  useEffect(() => {
     if (panel.title.length == 0) {
       engineCall("C2VM-TLE-Call-MainPanel-Update");
     }
-  }, [panel]);
+    setShowPanel(panel.shouldShowPanel);
+  }, [panel, panel.shouldShowPanel]);
+
+  // Save everything when the panel is closed
+  useEffect(() => {
+    return () => {
+      engineCall("C2VM-TLE-Call-MainPanel-Save", "{}");
+    };
+  }, []);
 
   const mouseDownHandler = (_event: React.MouseEvent<HTMLElement>) => {
     if (containerRef.current) {

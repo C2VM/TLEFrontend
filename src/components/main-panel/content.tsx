@@ -27,6 +27,8 @@ const Container = styled.div`
 
 const Label = styled.span`
   color: var(--textColorDim);
+  display: flex;
+  flex: 1;
 `;
 
 export default function Content(props: {items: MainPanelItem[]}) {
