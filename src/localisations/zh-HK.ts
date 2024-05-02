@@ -1,6 +1,7 @@
 export default {
   TrafficSignal: "交通燈",
-  Vanilla: "遊戲預設",
+  ModDefault: "預設",
+  Vanilla: "原版",
   SplitPhasing: "區隔式信號",
   AdvancedSplitPhasing: "進階版區隔式信號",
   ProtectedRightTurns: "專屬右轉",

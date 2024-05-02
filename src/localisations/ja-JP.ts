@@ -1,5 +1,6 @@
 export default {
   TrafficSignal: "信号",
+  ModDefault: "Default",
   Vanilla: "バニラ",
   SplitPhasing: "分割式",
   AdvancedSplitPhasing: "高度な分割式",

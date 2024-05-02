@@ -1,5 +1,6 @@
 export default {
   TrafficSignal: "Feux de circulations",
+  ModDefault: "Default",
   Vanilla: "Vanilla",
   SplitPhasing: "Phase fractionnée",
   AdvancedSplitPhasing: "Feux fractionnés avancés",

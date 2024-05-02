@@ -15,8 +15,6 @@ const TitleText = styled.div`
 
 const SecondaryText = styled.div`
   color: var(--textColorDim);
-  display: flex;
-  flex: 1;
 `;
 
 export default function Title(props: MainPanelItemTitle) {

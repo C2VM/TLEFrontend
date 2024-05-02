@@ -1,5 +1,6 @@
 export default {
   TrafficSignal: "Verkeerslicht",
+  ModDefault: "Default",
   Vanilla: "Standaard",
   SplitPhasing: "Gescheiden fasering",
   AdvancedSplitPhasing: "Geavanceerde gescheiden fasering",

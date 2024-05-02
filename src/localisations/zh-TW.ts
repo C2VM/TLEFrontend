@@ -1,6 +1,7 @@
 export default {
   TrafficSignal: "交通號誌",
-  Vanilla: "遊戲預設",
+  ModDefault: "預設",
+  Vanilla: "原版",
   SplitPhasing: "輪放多時相號誌",
   AdvancedSplitPhasing: "進階輪放多時相號誌",
   ProtectedRightTurns: "右轉保護時相",

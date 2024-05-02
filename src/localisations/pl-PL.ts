@@ -1,5 +1,6 @@
 export default {
   TrafficSignal: "Sygnalizacja świetlna",
+  ModDefault: "Default",
   Vanilla: "Domyślna",
   SplitPhasing: "Podział faz",
   AdvancedSplitPhasing: "Zaawansowany Podział faz",

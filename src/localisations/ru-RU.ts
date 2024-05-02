@@ -1,5 +1,6 @@
 export default {
   TrafficSignal: "Светофор",
+  ModDefault: "Default",
   Vanilla: "По умолчанию",
   SplitPhasing: "Очередь",
   AdvancedSplitPhasing: "Продвинутая очередь",

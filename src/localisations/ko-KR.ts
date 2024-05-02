@@ -1,5 +1,6 @@
 export default {
   TrafficSignal: "교통 신호",
+  ModDefault: "Default",
   Vanilla: "기본값",
   SplitPhasing: "분할 신호",
   AdvancedSplitPhasing: "고급 분할 신호",

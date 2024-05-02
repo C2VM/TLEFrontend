@@ -1,5 +1,6 @@
 export default {
   TrafficSignal: "信号灯",
+  ModDefault: "默认",
   Vanilla: "原版",
   SplitPhasing: "分隔式信号灯",
   AdvancedSplitPhasing: "进阶版分隔式信号灯",

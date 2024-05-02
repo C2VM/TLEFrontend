@@ -1,5 +1,6 @@
 export default {
   TrafficSignal: "Traffic Signal",
+  ModDefault: "Default",
   Vanilla: "Vanilla",
   SplitPhasing: "Split Phasing",
   AdvancedSplitPhasing: "Advanced Split Phasing",
