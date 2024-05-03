@@ -25,5 +25,7 @@ export default {
   CustomPedestrianDurationMultiplier: "Duração da fase dos Pedestres",
   CustomPedestrianDurationMultiplierSuffix: "x",
   AllowTurningOnRed: "Permitir Conversão no Vermelho",
-  CanaryBuildWarning: "Please note that you are using a canary build, which is more likely to contain game-breaking or save-breaking bugs and is strictly for playtesting only. DO NOT use this build for normal gameplay."
+  CanaryBuildWarning: "Please note that you are using a canary build, which is more likely to contain game-breaking or save-breaking bugs and is strictly for playtesting only. DO NOT use this build for normal gameplay.",
+  LdtMigrationNotice: "Lane Direction Tool has now been retired and succeeded by Traffic mod from krzychu124. Please install the Traffic mod, and it will automatically transfer your current lane settings to it. Click for more details (Open in a web browser).",
+  LdtRetirementNotice: "Lane Direction Tool has now been retired and succeeded by Traffic mod from krzychu124. Thank you for using LDT."
 };

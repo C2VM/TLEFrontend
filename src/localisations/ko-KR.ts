@@ -25,5 +25,7 @@ export default {
   CustomPedestrianDurationMultiplier: "보행 신호 지속 시간",
   CustomPedestrianDurationMultiplierSuffix: "x",
   AllowTurningOnRed: "적신호시 우회전(우측통행 기준) 허용",
-  CanaryBuildWarning: "canary build 사용 전 유의사항, 해당 빌드는 테스트 전용이므로 저장 파일이 망가지거나 버그가 발생 할 수 있습니다. 일반적인 경우에는 사용하지 마십시오."
+  CanaryBuildWarning: "canary build 사용 전 유의사항, 해당 빌드는 테스트 전용이므로 저장 파일이 망가지거나 버그가 발생 할 수 있습니다. 일반적인 경우에는 사용하지 마십시오.",
+  LdtMigrationNotice: "Lane Direction Tool has now been retired and succeeded by Traffic mod from krzychu124. Please install the Traffic mod, and it will automatically transfer your current lane settings to it. Click for more details (Open in a web browser).",
+  LdtRetirementNotice: "Lane Direction Tool has now been retired and succeeded by Traffic mod from krzychu124. Thank you for using LDT."
 };

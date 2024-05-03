@@ -55,7 +55,10 @@ interface MainPanelItemNotification {
   itemType: "notification",
   type: "notification",
   label: string,
-  notificationType: string
+  notificationType: "warning" | "notice",
+  key?: string,
+  value?: string,
+  engineEventName?: string
 }
 
 interface MainPanelItemRange {

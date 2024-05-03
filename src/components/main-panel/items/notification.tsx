@@ -3,6 +3,15 @@ import styled from 'styled-components';
 
 import { LocaleContext } from '@/context';
 import { getString } from '@/localisations';
+import { engineCall } from '@/engine';
+
+const Notice = styled.div`
+  border-radius: 3rem;
+  padding: 8rem;
+  display: flex;
+  width: 100%;
+  background-color: rgba(75, 200, 240, 0.5);
+`;
 
 const Warning = styled.div`
   animation-timing-function: linear;
@@ -29,10 +38,15 @@ const Label = styled.div`
 
 export default function Notification(props: MainPanelItemNotification) {
   const locale = useContext(LocaleContext);
+  const clickHandler = () => {
+    if (props.engineEventName && props.engineEventName.length > 0) {
+      engineCall(props.engineEventName, JSON.stringify(props));
+    }
+  };
   return (
     <>
       {props.notificationType == "warning" &&
-      <Warning>
+      <Warning onClick={clickHandler}>
         <Image src="Media/Game/Icons/AdvisorNotifications.svg" />
         <Label>{getString(locale, props.label)}</Label>
         <style>
@@ -43,6 +57,11 @@ export default function Notification(props: MainPanelItemNotification) {
           }`}
         </style>
       </Warning>}
+      {props.notificationType == "notice" &&
+      <Notice onClick={clickHandler}>
+        <Image src="Media/Game/Icons/AdvisorNotifications.svg" />
+        <Label>{getString(locale, props.label)}</Label>
+      </Notice>}
     </>
   );
 }

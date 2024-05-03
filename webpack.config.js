@@ -90,7 +90,14 @@ module.exports = {
     minimize: true,
     minimizer: [
       new TerserPlugin({
-        extractComments: false,
+        terserOptions: {
+          format: {
+            comments: /^\**!|@preserve|@license|@cc_on/i,
+          },
+        },
+        extractComments: {
+          banner: () => banner,
+        },
       }),
     ],
   },

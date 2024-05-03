@@ -9,7 +9,7 @@ const Container = styled.div`
 
 export default function Row(props: {data: MainPanelItem, children: React.ReactNode}) {
   const clickHandler = () => {
-    if ("engineEventName" in props.data) {
+    if ("engineEventName" in props.data && props.data.engineEventName) {
       engineCall(props.data.engineEventName, JSON.stringify(props.data));
     }
   };
