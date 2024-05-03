@@ -1,6 +1,6 @@
 export default {
   TrafficSignal: "信号",
-  ModDefault: "Default",
+  ModDefault: "デフォルト",
   Vanilla: "バニラ",
   SplitPhasing: "分割式",
   AdvancedSplitPhasing: "高度な分割式",
@@ -21,11 +21,11 @@ export default {
   Ahead: "直進",
   Right: "右折",
   UTurn: "転回",
-  GiveWayToOncomingVehicles: "Give Way to Oncoming Vehicles",
-  CustomPedestrianDurationMultiplier: "Pedestrian Phase Duration",
-  CustomPedestrianDurationMultiplierSuffix: "x",
-  AllowTurningOnRed: "Allow Turning on Red",
-  CanaryBuildWarning: "Please note that you are using a canary build, which is more likely to contain game-breaking or save-breaking bugs and is strictly for playtesting only. DO NOT use this build for normal gameplay.",
-  LdtMigrationNotice: "Lane Direction Tool has now been retired and succeeded by Traffic mod from krzychu124. Please install the Traffic mod, and it will automatically transfer your current lane settings to it. Click for more details (Open in a web browser).",
-  LdtRetirementNotice: "Lane Direction Tool has now been retired and succeeded by Traffic mod from krzychu124. Thank you for using LDT."
+  GiveWayToOncomingVehicles: "対向車に道を譲る",
+  CustomPedestrianDurationMultiplier: "歩行者通行時間",
+  CustomPedestrianDurationMultiplierSuffix: "倍",
+  AllowTurningOnRed: "赤信号を許容する",
+  CanaryBuildWarning: "Canary buildが実行されていることに注意してください。canary buildは正式版ではないため、ゲームを壊すバグやセーブデータを破壊するバグが含まれている可能性が高いテスト版です。このバージョンは通常のゲームプレイには使用しないでください。",
+  LdtMigrationNotice: "車線方向ツールは廃止され、krzychu124氏のTraffic modに引き継がれました。Traffic modをインストールすると、現在の車線設定が自動的に移行されます。詳しくはこちらをクリックしてください。（ウェブブラウザで開きます）",
+  LdtRetirementNotice: "車線方向ツールは廃止され、krzychu124氏のTraffic modに引き継がれました。これまで当機能をご利用いただきありがとうございました。"
 };
