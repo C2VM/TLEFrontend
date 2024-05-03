@@ -36,19 +36,19 @@ const Label = styled.div`
   flex: 1;
 `;
 
-export default function Notification(props: MainPanelItemNotification) {
+export default function Notification(props: { data: MainPanelItemNotification }) {
   const locale = useContext(LocaleContext);
   const clickHandler = () => {
-    if (props.engineEventName && props.engineEventName.length > 0) {
-      engineCall(props.engineEventName, JSON.stringify(props));
+    if (props.data.engineEventName && props.data.engineEventName.length > 0) {
+      engineCall(props.data.engineEventName, JSON.stringify(props));
     }
   };
   return (
     <>
-      {props.notificationType == "warning" &&
+      {props.data.notificationType == "warning" &&
       <Warning onClick={clickHandler}>
         <Image src="Media/Game/Icons/AdvisorNotifications.svg" />
-        <Label>{getString(locale, props.label)}</Label>
+        <Label>{getString(locale, props.data.label)}</Label>
         <style>
           {`@keyframes c2vm-tle-notification-warning {
             to {
@@ -57,10 +57,10 @@ export default function Notification(props: MainPanelItemNotification) {
           }`}
         </style>
       </Warning>}
-      {props.notificationType == "notice" &&
+      {props.data.notificationType == "notice" &&
       <Notice onClick={clickHandler}>
         <Image src="Media/Game/Icons/AdvisorNotifications.svg" />
-        <Label>{getString(locale, props.label)}</Label>
+        <Label>{getString(locale, props.data.label)}</Label>
       </Notice>}
     </>
   );

@@ -65,7 +65,7 @@ export default function Content(props: {items: MainPanelItem[]}) {
           return <Row data={item}><Button {...item} /></Row>;
         }
         if (item.itemType == "notification") {
-          return <Notification {...item} />;
+          return <Notification data={item} />;
         }
         if (item.itemType == "range") {
           return <Range data={item} />;
