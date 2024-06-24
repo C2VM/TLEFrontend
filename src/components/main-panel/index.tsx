@@ -1,14 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-import Header from './header';
+import engine from 'cohtml/cohtml';
+
 import Content from './content';
+import FloatingButton from '@/components/common/floating-button';
+import Header from './header';
 import { engineCall, useEngineOn } from '@/engine';
 
 const defaultPanel = {
   title: "",
   image: "",
-  shouldShowPanel: false,
+  showPanel: false,
+  showFloatingButton: false,
+  trafficLightsAssetEntityIndex: 0,
+  trafficLightsAssetEntityVersion: 0,
   items: []
 };
 
@@ -22,7 +28,10 @@ const useMainPanel = () => {
     setPanel({
       title: newPanel.title ?? defaultPanel.title,
       image: newPanel.image ?? defaultPanel.image,
-      shouldShowPanel: newPanel.shouldShowPanel ?? defaultPanel.shouldShowPanel,
+      showPanel: newPanel.showPanel ?? defaultPanel.showPanel,
+      showFloatingButton: newPanel.showFloatingButton ?? defaultPanel.showFloatingButton,
+      trafficLightsAssetEntityIndex: newPanel.trafficLightsAssetEntityIndex ?? defaultPanel.trafficLightsAssetEntityIndex,
+      trafficLightsAssetEntityVersion: newPanel.trafficLightsAssetEntityVersion ?? defaultPanel.trafficLightsAssetEntityVersion,
       items: newPanel.items ?? defaultPanel.items
     });
   }, [result]);
@@ -38,6 +47,7 @@ const Container = styled.div`
 `;
 
 export default function MainPanel() {
+  const [showFloatingButton, setShowFloatingButton] = useState(false);
   const [showPanel, setShowPanel] = useState(false);
 
   const [top, setTop] = useState(-999);
@@ -52,8 +62,9 @@ export default function MainPanel() {
     if (panel.title.length == 0) {
       engineCall("C2VM-TLE-Call-MainPanel-Update");
     }
-    setShowPanel(panel.shouldShowPanel);
-  }, [panel, panel.shouldShowPanel]);
+    setShowPanel(panel.showPanel);
+    setShowFloatingButton(panel.showFloatingButton);
+  }, [panel, panel.showPanel, panel.showFloatingButton]);
 
   // Save everything when the panel is closed
   useEffect(() => {
@@ -61,6 +72,18 @@ export default function MainPanel() {
       engineCall("C2VM-TLE-Call-MainPanel-Save", "{}");
     };
   }, []);
+
+  const floatingButtonClickHandler = () => {
+    if (panel.showPanel) {
+      engine.trigger("toolbar.clearAssetSelection");
+    } else {
+      engine.trigger("toolbar.selectAsset", {
+        index: panel.trafficLightsAssetEntityIndex,
+        version: panel.trafficLightsAssetEntityVersion,
+        __Type: "Unity.Entities.Entity"
+      });
+    }
+  };
 
   const mouseDownHandler = (_event: React.MouseEvent<HTMLElement>) => {
     if (containerRef.current) {
@@ -98,12 +121,19 @@ export default function MainPanel() {
   }
 
   return (
-    <Container
-      ref={containerRef}
-      style={style}
-    >
-      <Header onMouseDown={mouseDownHandler} {...panel} />
-      <Content items={panel.items} />
-    </Container>
+    <>
+      <FloatingButton
+        show={showFloatingButton}
+        src="Media/Game/Icons/TrafficLights.svg"
+        onClick={floatingButtonClickHandler}
+      />
+      <Container
+        ref={containerRef}
+        style={style}
+      >
+        <Header onMouseDown={mouseDownHandler} {...panel} />
+        <Content items={panel.items} />
+      </Container>
+    </>
   );
 }
