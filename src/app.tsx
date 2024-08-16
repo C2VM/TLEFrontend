@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 
+import engine from "cohtml/cohtml";
+import { bindValue, useValue } from "cs2/api";
+
 import { LocaleContext } from "./context";
-import { engineCall, isEngine } from "./engine";
 import { defaultLocale } from "./localisations";
 
 import MainPanel from "./components/main-panel";
@@ -11,28 +13,17 @@ export default function App() {
   const [locale, setLocale] = useState(defaultLocale);
   const [ldtOpenedPanel, setLdtOpenedPanel] = useState(-1);
 
-  const updateLocale = async (result : string) => {
-    const newLocale = JSON.parse(result);
-    if (newLocale.locale) {
-      setLocale(newLocale.locale);
-    }
-  };
-
-  useEffect(() => {
-    if ("engine" in window && isEngine(window.engine)) {
-      const listener = window.engine.on("C2VM-TLE-Event-UpdateLocale", (result) => updateLocale(result));
-      engineCall("C2VM-TLE-Call-UpdateLocale");
-      return () => {
-        listener.clear();
-      };
-    }
-  }, []);
+  const localeValue = useValue(bindValue("C2VM.TLE", "GetterLocale", "{}"));
+  const newLocale = JSON.parse(localeValue);
+  if (newLocale.locale && newLocale.locale != locale) {
+    setLocale(newLocale.locale);
+  }
 
   useEffect(() => {
     if (ldtOpenedPanel < 0) {
       const keyDownHandler = (event: KeyboardEvent) => {
         if (event.ctrlKey && event.key == "S") {
-          engineCall("C2VM-TLE-Call-KeyPress", JSON.stringify({ctrlKey: event.ctrlKey, key: event.key}));
+          engine.call("C2VM-TLE-Call-KeyPress", JSON.stringify({ctrlKey: event.ctrlKey, key: event.key}));
         }
       };
       document.addEventListener("keydown", keyDownHandler);

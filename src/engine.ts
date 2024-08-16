@@ -21,7 +21,7 @@ export async function useEngineCall(event: string, data?: string) {
 }
 
 export async function translatePosition(worldPosition: WorldPosition) {
-  const result = await engineCall("C2VM-TLE-Call-TranslatePosition", JSON.stringify(worldPosition));
+  const result = await engineCall("C2VM.TLE.CallTranslatePosition", JSON.stringify(worldPosition));
   const screenPosition = {left: 0, top: 0};
   if (result) {
     const parsedObj = JSON.parse(result);

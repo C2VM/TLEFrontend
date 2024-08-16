@@ -114,7 +114,7 @@ export default function Panel(props: {data: LaneDirectionToolPanel, onSave?: () 
   useEffect(() => {
     const keyDownHandler = (event: KeyboardEvent) => {
       if (event.ctrlKey && event.key == "S") {
-        buttonClickHandler("C2VM-TLE-Call-LaneDirectionTool-Panel-Save");
+        buttonClickHandler("C2VM.TLE.CallLaneDirectionToolPanelSave");
       }
     };
     document.addEventListener("keydown", keyDownHandler);

@@ -2,11 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import engine from 'cohtml/cohtml';
+import { bindValue, useValue } from 'cs2/api';
 
 import Content from './content';
 import FloatingButton from '@/components/common/floating-button';
 import Header from './header';
-import { engineCall, useEngineOn } from '@/engine';
 
 const defaultPanel = {
   title: "",
@@ -21,7 +21,7 @@ const defaultPanel = {
 const useMainPanel = () => {
   const [panel, setPanel] = useState<MainPanel>(defaultPanel);
 
-  const result = useEngineOn("C2VM-TLE-Event-UpdateMainPanel", "{}");
+  const result = useValue(bindValue("C2VM.TLE", "GetterMainPanel", "{}"));
 
   useEffect(() => {
     const newPanel = JSON.parse(result);
@@ -59,9 +59,6 @@ export default function MainPanel() {
   const panel = useMainPanel();
 
   useEffect(() => {
-    if (panel.title.length == 0) {
-      engineCall("C2VM-TLE-Call-MainPanel-Update");
-    }
     setShowPanel(panel.showPanel);
     setShowFloatingButton(panel.showFloatingButton);
   }, [panel, panel.showPanel, panel.showFloatingButton]);
@@ -69,7 +66,7 @@ export default function MainPanel() {
   // Save everything when the panel is closed
   useEffect(() => {
     return () => {
-      engineCall("C2VM-TLE-Call-MainPanel-Save", "{}");
+      engine.call("C2VM.TLE.CallMainPanelSave", "{}");
     };
   }, []);
 
