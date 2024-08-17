@@ -21,7 +21,7 @@ const defaultPanel = {
 const useMainPanel = () => {
   const [panel, setPanel] = useState<MainPanel>(defaultPanel);
 
-  const result = useValue(bindValue("C2VM.TLE", "GetterMainPanel", "{}"));
+  const result = useValue(bindValue("C2VM.TLE", "GetMainPanel", "{}"));
 
   useEffect(() => {
     const newPanel = JSON.parse(result);

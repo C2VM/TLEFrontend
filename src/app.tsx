@@ -13,7 +13,7 @@ export default function App() {
   const [locale, setLocale] = useState(defaultLocale);
   const [ldtOpenedPanel, setLdtOpenedPanel] = useState(-1);
 
-  const localeValue = useValue(bindValue("C2VM.TLE", "GetterLocale", "{}"));
+  const localeValue = useValue(bindValue("C2VM.TLE", "GetLocale", "{}"));
   const newLocale = JSON.parse(localeValue);
   if (newLocale.locale && newLocale.locale != locale) {
     setLocale(newLocale.locale);
