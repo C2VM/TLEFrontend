@@ -8,7 +8,7 @@ interface MainPanel {
   items: MainPanelItem[]
 }
 
-type MainPanelItem = MainPanelItemTitle | MainPanelItemMessage | MainPanelItemDivider | MainPanelItemRadio | MainPanelItemCheckbox | MainPanelItemButton | MainPanelItemNotification | MainPanelItemRange;
+type MainPanelItem = MainPanelItemTitle | MainPanelItemMessage | MainPanelItemDivider | MainPanelItemRadio | MainPanelItemCheckbox | MainPanelItemButton | MainPanelItemNotification | MainPanelItemRange | MainPanelItemCustomPhase;
 
 interface MainPanelItemTitle {
   itemType: "title",
@@ -77,15 +77,28 @@ interface MainPanelItemRange {
   engineEventName: string
 }
 
+interface MainPanelItemCustomPhase {
+  itemType: "customPhase",
+  activeIndex: number,
+  index: number,
+  length: number,
+  minimumDurationMultiplier: number
+}
+
 interface WorldPosition {
   x: number,
   y: number,
-  z: number
+  z: number,
+  key: string
 }
 
-interface ScreenPosition {
+interface ScreenPoint {
   left: number,
   top: number
+}
+
+interface ScreenPointMap {
+  [key: string]: ScreenPoint
 }
 
 interface LaneDirectionTool {
@@ -118,4 +131,66 @@ interface LaneDirection {
   banRight: boolean,
   banStraight: boolean,
   banUTurn: boolean
+}
+
+interface CityConfiguration {
+  leftHandTraffic: boolean
+}
+
+interface CustomPhaseLane {
+  type: CustomPhaseLaneType,
+  left: CustomPhaseSignalState,
+  straight: CustomPhaseSignalState,
+  right: CustomPhaseSignalState,
+  uTurn: CustomPhaseSignalState,
+  all: CustomPhaseSignalState
+}
+
+type CustomPhaseLaneType = "carLane" | "publicCarLane" | "trackLane" | "pedestrianLaneStopLine" | "pedestrianLaneNonStopLine";
+
+type CustomPhaseLaneDirection = "left" | "straight" | "right" | "uTurn" | "all";
+
+type CustomPhaseSignalState = "stop" | "go" | "yield" | "none";
+
+interface CustomPhaseSignal {
+  m_GoGroupMask: number,
+  m_YieldGroupMask: number
+}
+
+interface CustomPhaseTurn {
+  m_Left: CustomPhaseSignal,
+  m_Straight: CustomPhaseSignal,
+  m_Right: CustomPhaseSignal,
+  m_UTurn: CustomPhaseSignal
+}
+
+interface CustomPhaseGroupMask {
+  m_Edge: Entity,
+  m_EdgePosition: WorldPosition,
+  m_Group: number,
+  m_Car: CustomPhaseTurn,
+  m_PublicCar: CustomPhaseTurn,
+  m_Track: CustomPhaseTurn,
+  m_PedestrianStopLine: CustomPhaseSignal,
+  m_PedestrianNonStopLine: CustomPhaseSignal
+}
+
+interface EdgeInfo {
+  m_Edge: Entity,
+  m_Group: number,
+  m_Position: WorldPosition,
+  m_CarLaneLeftCount: number,
+  m_CarLaneStraightCount: number,
+  m_CarLaneRightCount: number,
+  m_CarLaneUTurnCount: number,
+  m_PublicCarLaneLeftCount: number,
+  m_PublicCarLaneStraightCount: number,
+  m_PublicCarLaneRightCount: number,
+  m_PublicCarLaneUTurnCount: number,
+  m_TrackLaneLeftCount: number,
+  m_TrackLaneStraightCount: number,
+  m_TrackLaneRightCount: number,
+  m_PedestrianLaneStopLineCount: number,
+  m_PedestrianLaneNonStopLineCount: number,
+  m_CustomPhaseGroupMask: CustomPhaseGroupMask
 }

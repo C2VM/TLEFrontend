@@ -77,7 +77,7 @@ const Divider = styled.div`
 
 export default function Panel(props: {data: LaneDirectionToolPanel, onSave?: () => void}) {
   const [panel, setPanel] = useState(props.data.lanes);
-  const [screenPosition, setScreenPosition] = useState<ScreenPosition>({left: -999, top: -999});
+  const [screenPosition, setScreenPosition] = useState<ScreenPoint>({left: -999, top: -999});
 
   useEffect(() => {
     setPanel(props.data.lanes);

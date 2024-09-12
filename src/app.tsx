@@ -3,15 +3,14 @@ import { useEffect, useState } from "react";
 import engine from "cohtml/cohtml";
 import { bindValue, useValue } from "cs2/api";
 
-import { LocaleContext } from "./context";
+import { CityConfigurationContext, defaultCityConfiguration, LocaleContext } from "./context";
 import { defaultLocale } from "./localisations";
 
 import MainPanel from "./components/main-panel";
-import LaneDirectionTool from "./components/lane-direction-tool";
+import CustomPhaseTool from "./components/custom-phase-tool";
 
 export default function App() {
   const [locale, setLocale] = useState(defaultLocale);
-  const [ldtOpenedPanel, setLdtOpenedPanel] = useState(-1);
 
   const localeValue = useValue(bindValue("C2VM.TLE", "GetLocale", "{}"));
   const newLocale = JSON.parse(localeValue);
@@ -19,22 +18,25 @@ export default function App() {
     setLocale(newLocale.locale);
   }
 
+  const cityConfigurationJson = useValue(bindValue("C2VM.TLE", "GetCityConfiguration", JSON.stringify(defaultCityConfiguration)));
+  const cityConfiguration = JSON.parse(cityConfigurationJson);
+
   useEffect(() => {
-    if (ldtOpenedPanel < 0) {
-      const keyDownHandler = (event: KeyboardEvent) => {
-        if (event.ctrlKey && event.key == "S") {
-          engine.call("C2VM-TLE-Call-KeyPress", JSON.stringify({ctrlKey: event.ctrlKey, key: event.key}));
-        }
-      };
-      document.addEventListener("keydown", keyDownHandler);
-      return () => document.removeEventListener("keydown", keyDownHandler);
-    }
-  }, [ldtOpenedPanel]);
+    const keyDownHandler = (event: KeyboardEvent) => {
+      if (event.ctrlKey && event.key == "S") {
+        engine.call("C2VM.TLE.CallKeyPress", JSON.stringify({ctrlKey: event.ctrlKey, key: event.key}));
+      }
+    };
+    document.addEventListener("keydown", keyDownHandler);
+    return () => document.removeEventListener("keydown", keyDownHandler);
+  }, []);
 
   return (
-    <LocaleContext.Provider value={locale}>
-      <MainPanel />
-      <LaneDirectionTool onChange={setLdtOpenedPanel} />
-    </LocaleContext.Provider>
+    <CityConfigurationContext.Provider value={cityConfiguration}>
+      <LocaleContext.Provider value={locale}>
+        <MainPanel />
+        <CustomPhaseTool />
+      </LocaleContext.Provider>
+    </CityConfigurationContext.Provider>
   );
 }

@@ -10,6 +10,7 @@ import Divider from './items/divider';
 import Range from './items/range';
 import Row from './items/row';
 import Notification from './items/notification';
+import CustomPhase from './items/custom-phase';
 
 import Button from '@/components/common/button';
 import Radio from '@/components/common/radio';
@@ -23,6 +24,7 @@ const Container = styled.div`
   flex: 1;
   position: relative;
   padding: 6rem;
+  overflow-y: scroll;
 `;
 
 const Label = styled.span`
@@ -69,6 +71,9 @@ export default function Content(props: {items: MainPanelItem[]}) {
         }
         if (item.itemType == "range") {
           return <Range data={item} />;
+        }
+        if (item.itemType == "customPhase") {
+          return <CustomPhase data={item} />;
         }
         return <></>;
       })}

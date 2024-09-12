@@ -41,6 +41,7 @@ const useMainPanel = () => {
 
 const Container = styled.div`
   width: 330rem;
+  max-height: 70vh;
   position: absolute;
   top: calc(10rem + var(--floatingToggleSize));
   left: 0rem;

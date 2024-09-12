@@ -17,7 +17,7 @@ const Image = styled.img`
 `;
 
 export default function Button(props: {data: LaneToolButton, onClick?: () => void}) {
-  const [screenPosition, setScreenPosition] = useState<ScreenPosition>({left: -999, top: -999});
+  const [screenPosition, setScreenPosition] = useState<ScreenPoint>({left: -999, top: -999});
 
   useEffect(() => {
     const updatePosition = async () => {

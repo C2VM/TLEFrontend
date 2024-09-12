@@ -33,6 +33,7 @@ export default function Lane(props: {data: LaneDirection, onClick: (eventName: "
             allow={!props.data.banLeft}
             variant="sign"
             sign="←"
+            state="stop"
             onClick={() => props.onClick("banLeft")}
             style={{opacity: opacity(!props.data.banLeft)}}
           />
@@ -42,6 +43,7 @@ export default function Lane(props: {data: LaneDirection, onClick: (eventName: "
             allow={!props.data.banStraight}
             variant="sign"
             sign="↑"
+            state="stop"
             onClick={() => props.onClick("banStraight")}
             style={{opacity: opacity(!props.data.banStraight)}}
           />
@@ -51,6 +53,7 @@ export default function Lane(props: {data: LaneDirection, onClick: (eventName: "
             allow={!props.data.banRight}
             variant="sign"
             sign="→"
+            state="stop"
             onClick={() => props.onClick("banRight")}
             style={{opacity: opacity(!props.data.banRight)}}
           />
@@ -61,6 +64,7 @@ export default function Lane(props: {data: LaneDirection, onClick: (eventName: "
             allow={!props.data.banUTurn}
             variant="sign"
             sign="↷"
+            state="stop"
             onClick={() => props.onClick("banUTurn")}
             style={{opacity: opacity(!props.data.banUTurn)}}
           />
@@ -71,6 +75,7 @@ export default function Lane(props: {data: LaneDirection, onClick: (eventName: "
             allow={!props.data.banUTurn}
             variant="sign"
             sign="↶"
+            state="stop"
             onClick={() => props.onClick("banUTurn")}
             style={{opacity: opacity(!props.data.banUTurn)}}
           />

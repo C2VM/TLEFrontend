@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import { bindValue, useValue } from 'cs2/api';
+
 export function useEngineOn(event: string, initialState: string) {
   const [result, setResult] = useState(initialState);
 
@@ -22,17 +24,23 @@ export async function useEngineCall(event: string, data?: string) {
 
 export async function translatePosition(worldPosition: WorldPosition) {
   const result = await engineCall("C2VM.TLE.CallTranslatePosition", JSON.stringify(worldPosition));
-  const screenPosition = {left: 0, top: 0};
+  const screenPoint = {left: 0, top: 0};
   if (result) {
     const parsedObj = JSON.parse(result);
     if (parsedObj.left) {
-      screenPosition.left = parsedObj.left;
+      screenPoint.left = parsedObj.left;
     }
     if (parsedObj.top) {
-      screenPosition.top = parsedObj.top;
+      screenPoint.top = parsedObj.top;
     }
   }
-  return screenPosition;
+  return screenPoint;
+}
+
+export function useScreenPoint(): ScreenPointMap {
+  const screenPointJson = useValue(bindValue("C2VM.TLE", "GetScreenPoint", "{}"));
+  const screenPointObj = JSON.parse(screenPointJson);
+  return screenPointObj;
 }
 
 export async function engineCall(event: string, data?: string) {

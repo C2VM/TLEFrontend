@@ -7,9 +7,9 @@ const Container = styled.div`
   display: flex;
 `;
 
-export default function Row(props: {data: MainPanelItem, children: React.ReactNode}) {
+export default function Row(props: {data?: MainPanelItem, children: React.ReactNode}) {
   const clickHandler = () => {
-    if ("engineEventName" in props.data && props.data.engineEventName) {
+    if (props.data && "engineEventName" in props.data && props.data.engineEventName) {
       engineCall(props.data.engineEventName, JSON.stringify(props.data));
     }
   };
