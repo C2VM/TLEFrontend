@@ -2,8 +2,6 @@ import { useEffect } from "react";
 
 import { bindValue, call, useValue } from "cs2/api";
 
-import { useScreenPoint } from "@/engine";
-
 import Panel from "./panel";
 
 export default function CustomPhaseTool() {
@@ -19,7 +17,7 @@ export default function CustomPhaseTool() {
     };
   }, [edgeInfoList]);
 
-  const screenPointMap = useScreenPoint();
+  const screenPointMap = useValue<ScreenPointMap>(bindValue("C2VM.TLE", "GetScreenPoint", {}));
 
   return (
     <>

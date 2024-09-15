@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useCallback, useContext, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 import { call } from 'cs2/api';
@@ -106,7 +106,7 @@ function SetBit(input: number, index: number, value: number) {
 }
 
 export default function Panel(props: {data: EdgeInfo, index: number, position: ScreenPoint}) {
-  const clickHandler = (index: number, type: CustomPhaseLaneType, direction: CustomPhaseLaneDirection, currentSignal: CustomPhaseSignalState) => {
+  const clickHandler = useCallback((index: number, type: CustomPhaseLaneType, direction: CustomPhaseLaneDirection, currentSignal: CustomPhaseSignalState) => {
     let newSignal = currentSignal == "stop" ? "go" : (currentSignal == "go" ? "yield" : "stop");
     const newGroupMask: CustomPhaseGroupMask = JSON.parse(JSON.stringify(props.data.m_CustomPhaseGroupMask));
     if (type == "carLane") {
@@ -169,7 +169,7 @@ export default function Panel(props: {data: EdgeInfo, index: number, position: S
       newGroupMask.m_PedestrianNonStopLine.m_GoGroupMask = SetBit(newGroupMask.m_PedestrianNonStopLine.m_GoGroupMask, index, newSignal != "stop" ? 1 : 0);
     }
     call("C2VM.TLE", "CallUpdateCustomPhaseGroupMask", JSON.stringify([newGroupMask]));
-  };
+  }, [props.data.m_CustomPhaseGroupMask]);
   const cityConfiguration = useContext(CityConfigurationContext);
   const carLaneCount = props.data.m_CarLaneLeftCount + props.data.m_CarLaneStraightCount + props.data.m_CarLaneRightCount + props.data.m_CarLaneUTurnCount;
   const publicCarLaneCount = props.data.m_PublicCarLaneLeftCount + props.data.m_PublicCarLaneStraightCount + props.data.m_PublicCarLaneRightCount + props.data.m_PublicCarLaneUTurnCount;
@@ -177,8 +177,17 @@ export default function Panel(props: {data: EdgeInfo, index: number, position: S
   if (carLaneCount + publicCarLaneCount + trackLaneCount + props.data.m_PedestrianLaneStopLineCount + props.data.m_PedestrianLaneNonStopLineCount <= 0) {
     return <></>;
   }
+  const containerRef = useRef(null);
+  useEffect(() => {
+    if (containerRef != null && containerRef.current != null && props.position) {
+      // @ts-expect-error
+      containerRef.current.style.leftPX = props.position.left;
+      // @ts-expect-error
+      containerRef.current.style.topPX = props.position.top;
+    }
+  }, [containerRef, props.position]);
   return (
-    <Container style={props.position}>
+    <Container ref={containerRef}>
       <Content>
         <LaneContainer>
           {carLaneCount > 0 && <>
