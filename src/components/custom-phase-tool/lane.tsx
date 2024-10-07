@@ -41,14 +41,15 @@ const IconContainer = styled.div`
 export default function Lane(props: {
   data: CustomPhaseLane,
   index: number,
+  showIcon: boolean,
   onClick: (index: number, type: CustomPhaseLaneType, direction: CustomPhaseLaneDirection, currentSignal: CustomPhaseSignalState) => void
 }) {
   const cityConfiguration = useContext(CityConfigurationContext);
   return (
     <Container>
       {["pedestrianLaneStopLine", "pedestrianLaneNonStopLine"].includes(props.data.type) ? <>
-        {props.data.type == "pedestrianLaneStopLine" && <Box><IconContainer><Walk stopLine={true} style={{color: "var(--textColor)"}} /></IconContainer></Box>}
-        {props.data.type == "pedestrianLaneNonStopLine" && <Box><IconContainer><Walk stopLine={false} style={{color: "var(--textColor)"}} /></IconContainer></Box>}
+        {props.data.type == "pedestrianLaneStopLine" && props.showIcon && <Box><IconContainer><Walk stopLine={true} style={{color: "var(--textColor)"}} /></IconContainer></Box>}
+        {props.data.type == "pedestrianLaneNonStopLine" && props.showIcon && <Box><IconContainer><Walk stopLine={false} style={{color: "var(--textColor)"}} /></IconContainer></Box>}
         <Box>
           <TrafficSignButton
             allow={false}
@@ -60,9 +61,9 @@ export default function Lane(props: {
         </Box>
         <Filler />
       </> : <>
-        {props.data.type == "carLane" && <Box><IconContainer><Car style={{color: "var(--textColor)"}} /></IconContainer></Box>}
-        {props.data.type == "publicCarLane" && <Box><IconContainer><BusSide style={{color: "var(--textColor)"}} /></IconContainer></Box>}
-        {props.data.type == "trackLane" && <Box><IconContainer><Train style={{color: "var(--textColor)"}} /></IconContainer></Box>}
+        {props.data.type == "carLane" && props.showIcon && <Box><IconContainer><Car style={{color: "var(--textColor)"}} /></IconContainer></Box>}
+        {props.data.type == "publicCarLane" && props.showIcon && <Box><IconContainer><BusSide style={{color: "var(--textColor)"}} /></IconContainer></Box>}
+        {props.data.type == "trackLane" && props.showIcon && <Box><IconContainer><Train style={{color: "var(--textColor)"}} /></IconContainer></Box>}
         {props.data.left != "none" && <>
           <Box>
             <TrafficSignButton

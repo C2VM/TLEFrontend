@@ -3,6 +3,7 @@ interface MainPanel {
   image: string,
   showPanel: boolean,
   showFloatingButton: boolean,
+  state: number,
   trafficLightsAssetEntityIndex: number,
   trafficLightsAssetEntityVersion: number,
   items: MainPanelItem[]
@@ -152,32 +153,31 @@ type CustomPhaseLaneDirection = "left" | "straight" | "right" | "uTurn" | "all";
 
 type CustomPhaseSignalState = "stop" | "go" | "yield" | "none";
 
-interface CustomPhaseSignal {
+interface GroupMaskSignal {
   m_GoGroupMask: number,
   m_YieldGroupMask: number
 }
 
-interface CustomPhaseTurn {
-  m_Left: CustomPhaseSignal,
-  m_Straight: CustomPhaseSignal,
-  m_Right: CustomPhaseSignal,
-  m_UTurn: CustomPhaseSignal
+interface GroupMaskTurn {
+  m_Left: GroupMaskSignal,
+  m_Straight: GroupMaskSignal,
+  m_Right: GroupMaskSignal,
+  m_UTurn: GroupMaskSignal
 }
 
-interface CustomPhaseGroupMask {
+interface EdgeGroupMask {
   m_Edge: Entity,
-  m_EdgePosition: WorldPosition,
-  m_Group: number,
-  m_Car: CustomPhaseTurn,
-  m_PublicCar: CustomPhaseTurn,
-  m_Track: CustomPhaseTurn,
-  m_PedestrianStopLine: CustomPhaseSignal,
-  m_PedestrianNonStopLine: CustomPhaseSignal
+  m_Position: WorldPosition,
+  m_Options: number,
+  m_Car: GroupMaskTurn,
+  m_PublicCar: GroupMaskTurn,
+  m_Track: GroupMaskTurn,
+  m_PedestrianStopLine: GroupMaskSignal,
+  m_PedestrianNonStopLine: GroupMaskSignal
 }
 
 interface EdgeInfo {
   m_Edge: Entity,
-  m_Group: number,
   m_Position: WorldPosition,
   m_CarLaneLeftCount: number,
   m_CarLaneStraightCount: number,
@@ -192,5 +192,28 @@ interface EdgeInfo {
   m_TrackLaneRightCount: number,
   m_PedestrianLaneStopLineCount: number,
   m_PedestrianLaneNonStopLineCount: number,
-  m_CustomPhaseGroupMask: CustomPhaseGroupMask
+  m_SubLaneInfoList: SubLaneInfo[],
+  m_EdgeGroupMask: EdgeGroupMask
+}
+
+interface SubLaneGroupMask {
+  m_SubLane: Entity,
+  m_Position: WorldPosition,
+  m_Options: number,
+  m_Vehicle: GroupMaskTurn,
+  m_Pedestrian: GroupMaskSignal
+}
+
+interface SubLaneInfo {
+  m_SubLane: Entity,
+  m_Position: WorldPosition,
+  m_CarLaneLeftCount: number,
+  m_CarLaneStraightCount: number,
+  m_CarLaneRightCount: number,
+  m_CarLaneUTurnCount: number,
+  m_TrackLaneLeftCount: number,
+  m_TrackLaneStraightCount: number,
+  m_TrackLaneRightCount: number,
+  m_PedestrianLaneCount: number,
+  m_SubLaneGroupMask: SubLaneGroupMask
 }

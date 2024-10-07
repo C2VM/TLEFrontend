@@ -13,6 +13,7 @@ const defaultPanel = {
   image: "",
   showPanel: false,
   showFloatingButton: false,
+  state: 0,
   trafficLightsAssetEntityIndex: 0,
   trafficLightsAssetEntityVersion: 0,
   items: []
@@ -30,6 +31,7 @@ const useMainPanel = () => {
       image: newPanel.image ?? defaultPanel.image,
       showPanel: newPanel.showPanel ?? defaultPanel.showPanel,
       showFloatingButton: newPanel.showFloatingButton ?? defaultPanel.showFloatingButton,
+      state: newPanel.state ?? defaultPanel.state,
       trafficLightsAssetEntityIndex: newPanel.trafficLightsAssetEntityIndex ?? defaultPanel.trafficLightsAssetEntityIndex,
       trafficLightsAssetEntityVersion: newPanel.trafficLightsAssetEntityVersion ?? defaultPanel.trafficLightsAssetEntityVersion,
       items: newPanel.items ?? defaultPanel.items
