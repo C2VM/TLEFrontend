@@ -81,6 +81,7 @@ interface MainPanelItemRange {
 interface MainPanelItemCustomPhase {
   itemType: "customPhase",
   activeIndex: number,
+  currentSignalGroup: number,
   index: number,
   length: number,
   minimumDurationMultiplier: number

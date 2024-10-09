@@ -21,6 +21,7 @@ const Label = styled.div`
   flex-grow: 1;
   flex-shrink: 0;
   flex-basis: auto;
+  display: inline;
 `;
 
 const IconContainer = styled.div`
@@ -42,6 +43,8 @@ const IconStyleDisabled = {
   opacity: 0.3
 };
 
+const ActiveDot = () => <div style={{color: "#34bf42", marginLeft: "6rem"}}>•</div>;
+
 export default function CustomPhase(props: { data: MainPanelItemCustomPhase }) {
   const locale = useContext(LocaleContext);
   const swap = (index1: number, index2: number) => {
@@ -53,7 +56,7 @@ export default function CustomPhase(props: { data: MainPanelItemCustomPhase }) {
   return (
     <>
       <Row>
-        <Label>{getString(locale, "Phase") + " #" + (props.data.index + 1)}</Label>
+        <Label>{getString(locale, "Phase") + " #" + (props.data.index + 1)}{props.data.activeIndex < 0 && props.data.index + 1 == props.data.currentSignalGroup && <ActiveDot />}</Label>
         <IconContainer>
           {props.data.activeIndex != props.data.index && <Tune style={IconStyle} onClick={() => call("C2VM.TLE", "CallSetActiveEditingCustomPhaseIndex", JSON.stringify({index: props.data.index}))} />}
           {props.data.activeIndex == props.data.index && <>
