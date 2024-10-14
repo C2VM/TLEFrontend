@@ -250,52 +250,54 @@ export default function EdgePanel(props: {data: EdgeInfo, index: number, positio
                 onClick={clickHandler}
               />
             </Column>
-            {props.data.m_PedestrianLaneStopLineCount + props.data.m_PedestrianLaneNonStopLineCount > 0 && <Divider />}
+            {carLaneCount + publicCarLaneCount > 0 && props.data.m_PedestrianLaneStopLineCount + props.data.m_PedestrianLaneNonStopLineCount > 0 && <Divider />}
           </>}
-          {cityConfiguration.leftHandTraffic && <>
-            {props.data.m_PedestrianLaneStopLineCount > 0 && <>
-              <Column>
-                <Lane
-                  data={GetCustomPhaseLane(props.data, props.index, "pedestrianLaneStopLine")}
-                  index={props.index}
-                  showIcon={true}
-                  onClick={clickHandler}
-                />
-              </Column>
-              {props.data.m_PedestrianLaneNonStopLineCount > 0 && <Divider />}
+          {carLaneCount + publicCarLaneCount > 0 && <>
+            {cityConfiguration.leftHandTraffic && <>
+              {props.data.m_PedestrianLaneStopLineCount > 0 && <>
+                <Column>
+                  <Lane
+                    data={GetCustomPhaseLane(props.data, props.index, "pedestrianLaneStopLine")}
+                    index={props.index}
+                    showIcon={true}
+                    onClick={clickHandler}
+                  />
+                </Column>
+                {props.data.m_PedestrianLaneNonStopLineCount > 0 && <Divider />}
+              </>}
+              {props.data.m_PedestrianLaneNonStopLineCount > 0 && <>
+                <Column>
+                  <Lane
+                    data={GetCustomPhaseLane(props.data, props.index, "pedestrianLaneNonStopLine")}
+                    index={props.index}
+                    showIcon={true}
+                    onClick={clickHandler}
+                  />
+                </Column>
+              </>}
             </>}
-            {props.data.m_PedestrianLaneNonStopLineCount > 0 && <>
-              <Column>
-                <Lane
-                  data={GetCustomPhaseLane(props.data, props.index, "pedestrianLaneNonStopLine")}
-                  index={props.index}
-                  showIcon={true}
-                  onClick={clickHandler}
-                />
-              </Column>
-            </>}
-          </>}
-          {!cityConfiguration.leftHandTraffic && <>
-            {props.data.m_PedestrianLaneNonStopLineCount > 0 && <>
-              <Column>
-                <Lane
-                  data={GetCustomPhaseLane(props.data, props.index, "pedestrianLaneNonStopLine")}
-                  index={props.index}
-                  showIcon={true}
-                  onClick={clickHandler}
-                />
-              </Column>
-              {props.data.m_PedestrianLaneStopLineCount > 0 && <Divider />}
-            </>}
-            {props.data.m_PedestrianLaneStopLineCount > 0 && <>
-              <Column>
-                <Lane
-                  data={GetCustomPhaseLane(props.data, props.index, "pedestrianLaneStopLine")}
-                  index={props.index}
-                  showIcon={true}
-                  onClick={clickHandler}
-                />
-              </Column>
+            {!cityConfiguration.leftHandTraffic && <>
+              {props.data.m_PedestrianLaneNonStopLineCount > 0 && <>
+                <Column>
+                  <Lane
+                    data={GetCustomPhaseLane(props.data, props.index, "pedestrianLaneNonStopLine")}
+                    index={props.index}
+                    showIcon={true}
+                    onClick={clickHandler}
+                  />
+                </Column>
+                {props.data.m_PedestrianLaneStopLineCount > 0 && <Divider />}
+              </>}
+              {props.data.m_PedestrianLaneStopLineCount > 0 && <>
+                <Column>
+                  <Lane
+                    data={GetCustomPhaseLane(props.data, props.index, "pedestrianLaneStopLine")}
+                    index={props.index}
+                    showIcon={true}
+                    onClick={clickHandler}
+                  />
+                </Column>
+              </>}
             </>}
           </>}
         </LaneContainer>

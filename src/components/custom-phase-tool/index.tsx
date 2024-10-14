@@ -9,8 +9,7 @@ import SubLanePanel from "./sublane-panel";
 
 export default function CustomPhaseTool() {
   const activeEditingCustomPhaseIndex = useValue(bindValue("C2VM.TLE", "GetActiveEditingCustomPhaseIndex", -1));
-  const edgeInfoJson = useValue(bindValue("C2VM.TLE", "GetEdgeInfo", "[]"));
-  const edgeInfoList: EdgeInfo[] = JSON.parse(edgeInfoJson);
+  const edgeInfoList = useValue(bindValue<EdgeInfo[]>("C2VM.TLE", "GetEdgeInfo", []));
 
   useEffect(() => {
     const edgePositionArray = JSON.stringify(edgeInfoList.filter(edge => (edge.m_EdgeGroupMask.m_Options & EdgeGroupMaskOptions.PerLaneSignal) == 0).map(item => item.m_Position));

@@ -40,7 +40,7 @@ export default function Notification(props: { data: MainPanelItemNotification })
   const locale = useContext(LocaleContext);
   const clickHandler = () => {
     if (props.data.engineEventName && props.data.engineEventName.length > 0) {
-      engineCall(props.data.engineEventName, JSON.stringify(props));
+      engineCall(props.data.engineEventName, JSON.stringify(props.data));
     }
   };
   return (

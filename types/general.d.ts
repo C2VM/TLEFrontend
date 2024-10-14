@@ -191,6 +191,7 @@ interface EdgeInfo {
   m_TrackLaneLeftCount: number,
   m_TrackLaneStraightCount: number,
   m_TrackLaneRightCount: number,
+  m_TrainTrackCount: number,
   m_PedestrianLaneStopLineCount: number,
   m_PedestrianLaneNonStopLineCount: number,
   m_SubLaneInfoList: SubLaneInfo[],
