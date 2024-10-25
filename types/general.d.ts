@@ -1,11 +1,10 @@
 interface MainPanel {
   title: string,
   image: string,
+  position: ScreenPoint,
   showPanel: boolean,
   showFloatingButton: boolean,
   state: number,
-  trafficLightsAssetEntityIndex: number,
-  trafficLightsAssetEntityVersion: number,
   items: MainPanelItem[]
 }
 

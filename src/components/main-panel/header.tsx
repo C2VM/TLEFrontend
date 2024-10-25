@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const Container = styled.div`
   background-color: var(--panelColorDark);
   backdrop-filter: var(--panelBlur);
-  border-radius: 4rem 4rem 0rem 0rem;
   color: var(--accentColorNormal);
   font-size: 14rem;
   padding: 6rem 10rem;

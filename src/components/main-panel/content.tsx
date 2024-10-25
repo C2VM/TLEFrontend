@@ -20,7 +20,6 @@ const Container = styled.div`
   background-color: var(--panelColorNormal);
   backdrop-filter: var(--panelBlur);
   color: var(--textColor);
-  border-radius: 0rem 0rem 4rem 4rem;
   flex: 1;
   position: relative;
   padding: 6rem;
