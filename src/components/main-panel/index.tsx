@@ -78,7 +78,7 @@ export default function MainPanel() {
         index: panel.trafficLightsAssetEntityIndex,
         version: panel.trafficLightsAssetEntityVersion,
         __Type: "Unity.Entities.Entity"
-      });
+      }, true);
     }
   };
 
