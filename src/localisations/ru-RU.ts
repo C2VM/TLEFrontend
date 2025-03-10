@@ -1,7 +1,7 @@
 export default {
   TrafficSignal: "Светофор",
-  ModDefault: "По-умолчанию",
-  Vanilla: "По умолчанию",
+  ModDefault: "По умолчанию (мод)",
+  Vanilla: "Внутриигровой",
   SplitPhasing: "Очередь",
   AdvancedSplitPhasing: "Продвинутая очередь",
   ProtectedRightTurns: "Защищенные правые повороты",
@@ -26,6 +26,6 @@ export default {
   CustomPedestrianDurationMultiplierSuffix: "⨯",
   AllowTurningOnRed: "Разрешить поворот на красный свет",
   CanaryBuildWarning: "Обратите внимание, что вы используете тестовую сборку, которая может содержать ошибки, нарушающие игровой процесс или может повредить сохранение, и предназначена исключительно для тестирования. НЕ используйте эту сборку для обычной игры.",
-  LdtMigrationNotice: "Lane Direction Tool has now been retired and succeeded by Traffic mod from krzychu124. Please install the Traffic mod, and it will automatically transfer your current lane settings to it. Click for more details (Open in a web browser).",
+  LdtMigrationNotice: "Инструмент \"Настройка направления полос\" был отключен и заменен модификацией \"Traffic mod\" от krzychu124. Пожалуйста, установите модификацию \"Traffic mod\" и она автоматически перенесет ваши текущие настройки полос. Нажмите для получения дополнительных деталей (открыть в веб-браузере).",
   LdtRetirementNotice: "Lane Direction Tool has now been retired and succeeded by Traffic mod from krzychu124. Thank you for using LDT."
 };
