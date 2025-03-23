@@ -14,15 +14,11 @@ const Notice = styled.div`
 `;
 
 const Warning = styled.div`
-  animation-timing-function: linear;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-  animation-name: c2vm-tle-notification-warning;
   border-radius: 3rem;
   padding: 8rem;
   display: flex;
   width: 100%;
+  background-color: rgba(200, 0, 0, 0.5);
 `;
 
 const Image = styled.img`
@@ -49,13 +45,6 @@ export default function Notification(props: { data: MainPanelItemNotification })
       <Warning onClick={clickHandler}>
         <Image src="Media/Game/Icons/AdvisorNotifications.svg" />
         <Label>{getString(locale, props.data.label)}</Label>
-        <style>
-          {`@keyframes c2vm-tle-notification-warning {
-            to {
-              background-color: rgba(200, 0, 0, 0.5);
-            }
-          }`}
-        </style>
       </Warning>}
       {props.data.notificationType == "notice" &&
       <Notice onClick={clickHandler}>
