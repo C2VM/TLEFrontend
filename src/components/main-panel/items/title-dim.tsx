@@ -11,14 +11,14 @@ const Container = styled.div`
 `;
 
 const TitleText = styled.div`
-  color: var(--textColor);
+  color: var(--textColorDim);
 `;
 
 const SecondaryText = styled.div`
   color: var(--textColorDim);
 `;
 
-export default function Title(props: MainPanelItemTitle) {
+export default function TitleDim(props: MainPanelItemTitle) {
   const locale = useContext(LocaleContext);
   return (
     <Container>

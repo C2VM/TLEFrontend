@@ -6,7 +6,7 @@ import { engineCall } from '@/engine';
 import { getString } from '@/localisations';
 
 import Range from '@/components/common/range';
-import Title from './title';
+import TitleDim from './title-dim';
 
 const Container = styled.div`
   padding: 4rem 8rem;
@@ -32,7 +32,7 @@ export default function MainPanelRange(props: {data: MainPanelItemRange}) {
   }, [props.data.value]);
   return (
     <Container>
-      <Title itemType="title" title={props.data.label} secondaryText={getString(locale, props.data.valuePrefix) + value + getString(locale, props.data.valueSuffix)} />
+      <TitleDim itemType="title" title={props.data.label} secondaryText={getString(locale, props.data.valuePrefix) + `${Math.round(value * 100) / 100}` + getString(locale, props.data.valueSuffix)} />
       <Gap />
       <Range data={props.data} onChange={changeHandler} onUpdate={updateHandler} />
     </Container>

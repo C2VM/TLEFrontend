@@ -10,13 +10,13 @@ import Divider from './items/divider';
 import Range from './items/range';
 import Row from './items/row';
 import Notification from './items/notification';
-import CustomPhase from './items/custom-phase';
 
 import Button from '@/components/common/button';
 import Radio from '@/components/common/radio';
 import Checkbox from '@/components/common/checkbox';
 
 const Container = styled.div`
+  width: 330rem;
   background-color: var(--panelColorNormal);
   backdrop-filter: var(--panelBlur);
   color: var(--textColor);
@@ -70,9 +70,6 @@ export default function Content(props: {items: MainPanelItem[]}) {
         }
         if (item.itemType == "range") {
           return <Range data={item} />;
-        }
-        if (item.itemType == "customPhase") {
-          return <CustomPhase data={item} />;
         }
         return <></>;
       })}

@@ -4,9 +4,12 @@ import styled from 'styled-components';
 import engine from 'cohtml/cohtml';
 import { bindValue, useValue } from 'cs2/api';
 
-import Content from './content';
-import FloatingButton from '@/components/common/floating-button';
 import Header from './header';
+import Content from './content';
+
+import CustomPhaseContent from '@/components/custom-phase-tool/main-panel';
+
+import FloatingButton from '@/components/common/floating-button';
 
 const defaultPanel = {
   title: "",
@@ -40,7 +43,6 @@ const useMainPanel = () => {
 };
 
 const Container = styled.div`
-  width: 330rem;
   position: absolute;
   top: calc(10rem + var(--floatingToggleSize));
   left: 0rem;
@@ -64,8 +66,10 @@ export default function MainPanel() {
   useEffect(() => {
     setShowPanel(panel.showPanel);
     setShowFloatingButton(panel.showFloatingButton);
-    setTop(panel.position.top);
-    setLeft(panel.position.left);
+    if (!dragging) {
+      setTop(panel.position.top);
+      setLeft(panel.position.left);
+    }
   }, [panel, panel.showPanel, panel.showFloatingButton, panel.position.top, panel.position.left]);
 
   // Save everything when the panel is closed
@@ -153,7 +157,8 @@ export default function MainPanel() {
         style={style}
       >
         <Header onMouseDown={mouseDownHandler} {...panel} />
-        <Content items={panel.items} />
+        {panel.state != 3 && <Content items={panel.items} />}
+        {panel.state == 3 && <CustomPhaseContent items={panel.items} />}
       </Container>
     </>
   );

@@ -93,7 +93,9 @@ export default function Range(props: {
   }, [dragging, mouseMoveHandler, mouseUpHandler]);
 
   useEffect(() => {
-    setValue(data.value);
+    if (!dragging) {
+      setValue(data.value);
+    }
   }, [data]);
 
   const sliderValue = (value - data.min) / (data.max - data.min) * 100;

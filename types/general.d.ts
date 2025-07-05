@@ -83,7 +83,24 @@ interface MainPanelItemCustomPhase {
   currentSignalGroup: number,
   index: number,
   length: number,
-  minimumDurationMultiplier: number
+  timer: number,
+  turnsSinceLastRun: number,
+  lowFlowTimer: number,
+  carFlow: number,
+  carLaneOccupied: number,
+  publicCarLaneOccupied: number,
+  trackLaneOccupied: number,
+  pedestrianLaneOccupied: number,
+  weightedWaiting: number,
+  targetDuration: number,
+  priority: number,
+  minimumDuration: number,
+  targetDurationMultiplier: number,
+  laneOccupiedMultiplier: number,
+  intervalExponent: number,
+  prioritiseTrack: boolean,
+  prioritisePublicCar: boolean,
+  prioritisePedestrian: boolean,
 }
 
 interface WorldPosition {
