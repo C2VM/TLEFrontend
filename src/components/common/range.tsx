@@ -2,35 +2,39 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 const RangeComponent = styled.div`
-  padding: 4rem 0;
+  padding: 0.25em 0;
   width: 100%;
 `;
 
 const Track = styled.div`
   background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 4rem;
+  border-radius: 0.25em;
   width: 100%;
-  height: 8rem;
+  height: 0.5em;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: row;
-  padding: 0 8rem;
+  padding: 0 0.5em;
 `;
 
 const Filler = styled.div`
   background-color: var(--accentColorNormal);
-  box-shadow: var(--accentColorNormal) -8rem 0;
-  border-radius: 4rem 0 0 4rem;
-  height: 8rem;
+  box-shadow: var(--accentColorNormal) -0.5em 0;
+  border-radius: 0.25em 0 0 0.25em;
+  height: 0.5em;
 `;
 
-const Thumb = styled.div`
+const Thumb = styled.div<{active: boolean}>`
   background-color: var(--textColor);
   border-radius: 50%;
-  width: 16rem;
-  height: 16rem;
-  margin-left: -8rem;
+  width: 1.0em;
+  height: 1.0em;
+  margin-left: -0.5em;
+  transform: ${props => props.active ? "scale3d(1.1, 1.1, 1)" : "none"};
+  &:hover {
+    transform: scale3d(1.1, 1.1, 1);
+  }
 `;
 
 export default function Range(props: {
@@ -68,10 +72,10 @@ export default function Range(props: {
   const mouseUpHandler = useCallback((event: MouseEvent) => {
     const newValue = getNewValue(event.clientX);
     setValue(newValue);
+    setDragging(false);
     if (props.onChange) {
       props.onChange(newValue);
     }
-    setDragging(false);
   }, [props, getNewValue]);
   const mouseMoveHandler = useCallback((event: MouseEvent) => {
     const newValue = getNewValue(event.clientX);
@@ -94,7 +98,13 @@ export default function Range(props: {
 
   useEffect(() => {
     if (!dragging) {
-      setValue(data.value);
+      if (data.value < data.min) {
+        setValue(data.min);
+      } else if (data.value > data.max) {
+        setValue(data.max);
+      } else {
+        setValue(data.value);
+      }
     }
   }, [data]);
 
@@ -104,7 +114,7 @@ export default function Range(props: {
     <RangeComponent onMouseDown={mouseDownHandler}>
       <Track ref={sliderRef}>
         <Filler style={{width: sliderValue + "%"}} />
-        <Thumb />
+        <Thumb active={dragging} />
       </Track>
     </RangeComponent>
   );

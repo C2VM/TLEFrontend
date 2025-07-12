@@ -15,51 +15,57 @@ import TitleDim from '@/components/main-panel/items/title-dim';
 import Checkbox from '@/components/common/checkbox';
 import Button from '@/components/common/button';
 
-import Tune from '@/components/common/icons/tune';
+import Check from '@/components/common/icons/check';
 import ChevronUp from '@/components/common/icons/chevron-up';
 import ChevronDown from '@/components/common/icons/chevron-down';
 import Delete from '@/components/common/icons/delete';
-import Check from '@/components/common/icons/check';
+import LinkVariant from '@/components/common/icons/link-variant';
+import Tune from '@/components/common/icons/tune';
 
 const Container = styled.div`
-  width: 660rem;
+  width: 30em;
   display: flex;
   flex-direction: row;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
 `;
 
 const MainPanelContainer = styled.div`
-  width: 300rem;
-  max-width: 300rem;
+  width: 13.5em;
+  max-width: 13.5em;
   background-color: var(--panelColorNormal);
   backdrop-filter: var(--panelBlur);
   color: var(--textColor);
   flex: 1;
   position: relative;
-  padding: 6rem;
-  overflow-y: scroll;
+  padding: 0.25em;
 `;
 
 const SubPanelContainer = styled.div`
-  width: 360rem;
-  max-width: 360rem;
+  width: 16.5em;
+  max-width: 16.5em;
   background-color: var(--sectionBackgroundColor);
   backdrop-filter: var(--panelBlur);
   flex: 1;
   position: relative;
-  padding: 6rem;
+  padding: 0.25em;
   overflow-y: scroll;
 `;
 
-const Filler = styled.div`
+const CustomPhaseItemContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
-  flex-shrink: 0;
+  flex-shrink: 1;
   flex-basis: auto;
+  overflow-y: scroll;
 `;
 
-const Label = styled.div`
-  color: var(--textColor);
+const Label = styled.div<{dim?: boolean}>`
+  color: ${props => props.dim ? "var(--textColorDim)" : "var(--textColor)"};
   flex-grow: 1;
-  flex-shrink: 0;
+  flex-shrink: 1;
   flex-basis: auto;
   display: inline;
 `;
@@ -67,12 +73,12 @@ const Label = styled.div`
 const DimLabel = styled.div`
   color: var(--textColorDim);
   flex-grow: 1;
-  flex-shrink: 0;
+  flex-shrink: 1;
   flex-basis: auto;
   display: inline;
 `;
 
-const IconContainer = styled.div`
+const IconBarContainer = styled.div`
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: auto;
@@ -81,10 +87,21 @@ const IconContainer = styled.div`
   justify-content: flex-end;
 `;
 
+const IconContainer = styled.div<{disabled?: boolean}>`
+  display: flex;
+  margin-left: 0.35em;
+  border-radius: 0.2em;
+  &:hover {
+    filter: ${props => props.disabled ? "none" : "brightness(1.2) contrast(1.2)"};
+    background: ${props => props.disabled ? "transparent" : "rgba(0, 0, 0, 0.1)"};
+  }
+`;
+
 const IconStyle = {
-  marginLeft: "10rem",
   color: "var(--textColorDim)",
-  width: "24rem"
+  width: "1.1em",
+  height: "1.1em",
+  fontSize: "1.1em"
 };
 
 const IconStyleDisabled = {
@@ -121,6 +138,45 @@ const SaveButton = () => {
   );
 };
 
+const CustomPhaseItemDivider = () => {
+  const CustomPhaseItemDividerContainer = styled.div`
+    display: flex;
+    align-items: center;
+  `;
+  const CustomDivider = styled.div<{invisible?: boolean}>`
+    height: 4px;
+    background-color: ${props => props.invisible ? "transparent" : "rgba(255, 255, 255, 0.1)"};
+    border-radius: 2px;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    margin: 0.25em;
+  `;
+  const CustomIconContainer = styled.div<{disabled?: boolean}>`
+    display: flex;
+    border-radius: 0.2em;
+    &:hover {
+      filter: ${props => props.disabled ? "none" : "brightness(1.2) contrast(1.2)"};
+      background: ${props => props.disabled ? "transparent" : "rgba(0, 0, 0, 0.1)"};
+    }
+  `;
+  const CustomIconStyle = {
+    color: "var(--textColorDim)",
+    width: "1.0em",
+    height: "1.0em",
+    fontSize: "1.0em"
+  };
+  return (
+    <CustomPhaseItemDividerContainer>
+      <CustomDivider style={{borderTopRightRadius: 0, borderBottomRightRadius: 0}} />
+      <CustomIconContainer>
+        <LinkVariant style={CustomIconStyle} />
+      </CustomIconContainer>
+      <CustomDivider style={{borderTopLeftRadius: 0, borderBottomLeftRadius: 0}} />
+    </CustomPhaseItemDividerContainer>
+  );
+};
+
 export default function MainPanel(props: { items: MainPanelItem[] }) {
   let activeIndex = -1;
   let activeItem = null;
@@ -141,8 +197,9 @@ export default function MainPanel(props: { items: MainPanelItem[] }) {
   return (
     <Container>
       <MainPanelContainer>
-        {props.items.map(item => item.itemType == "customPhase" && <CustomPhaseItem data={item} />)}
-        <Filler />
+        <CustomPhaseItemContainer>
+          {props.items.map(item => item.itemType == "customPhase" && <CustomPhaseItem data={item} />)}
+        </CustomPhaseItemContainer>
         {length > 0 && <Divider />}
         {length < 16 && <AddButton />}
         <SaveButton />
@@ -165,19 +222,25 @@ const CustomPhaseItem = (props: { data: MainPanelItemCustomPhase }) => {
   };
   return (
     <>
-      <Row>
-        <Label>{getString(locale, "Phase") + " #" + (props.data.index + 1)}{props.data.activeIndex < 0 && props.data.index + 1 == props.data.currentSignalGroup && <ActiveDot />}</Label>
-        <IconContainer>
-          {props.data.activeIndex != props.data.index && <Tune style={IconStyle} onClick={() => call("C2VM.TLE", "CallSetActiveEditingCustomPhaseIndex", JSON.stringify({index: props.data.index}))} />}
+      <Row style={{padding: "0.25em"}}>
+        <Label dim={props.data.activeIndex < 0 ? props.data.index + 1 != props.data.currentSignalGroup : props.data.activeIndex != props.data.index}>
+          {getString(locale, "Phase") + " #" + (props.data.index + 1)}{props.data.activeIndex < 0 && props.data.index + 1 == props.data.currentSignalGroup && <ActiveDot />}
+        </Label>
+        <IconBarContainer>
+          {props.data.activeIndex != props.data.index && <IconContainer><Tune style={IconStyle} onClick={() => call("C2VM.TLE", "CallSetActiveEditingCustomPhaseIndex", JSON.stringify({index: props.data.index}))} /></IconContainer>}
           {props.data.activeIndex == props.data.index && <>
-            <Delete style={IconStyle} onClick={() => call("C2VM.TLE", "CallRemoveCustomPhase", JSON.stringify({index: props.data.index}))} />
-            <Check style={IconStyle} onClick={() => call("C2VM.TLE", "CallSetActiveEditingCustomPhaseIndex", JSON.stringify({index: -1}))} />
-            <ChevronUp style={{...IconStyle, ...(props.data.activeIndex <= 0 && IconStyleDisabled)}} onClick={() => swap(props.data.activeIndex, props.data.activeIndex - 1)} />
-            <ChevronDown style={{...IconStyle, ...(props.data.activeIndex >= (props.data.length - 1) && IconStyleDisabled)}} onClick={() => swap(props.data.activeIndex, props.data.activeIndex + 1)} />
+            <IconContainer><Delete style={IconStyle} onClick={() => call("C2VM.TLE", "CallRemoveCustomPhase", JSON.stringify({index: props.data.index}))} /></IconContainer>
+            <IconContainer><Check style={IconStyle} onClick={() => call("C2VM.TLE", "CallSetActiveEditingCustomPhaseIndex", JSON.stringify({index: -1}))} /></IconContainer>
+            <IconContainer disabled={props.data.activeIndex <= 0}>
+              <ChevronUp style={{...IconStyle, ...(props.data.activeIndex <= 0 && IconStyleDisabled)}} onClick={() => swap(props.data.activeIndex, props.data.activeIndex - 1)} />
+            </IconContainer>
+            <IconContainer disabled={props.data.activeIndex >= (props.data.length - 1)}>
+              <ChevronDown style={{...IconStyle, ...(props.data.activeIndex >= (props.data.length - 1) && IconStyleDisabled)}} onClick={() => swap(props.data.activeIndex, props.data.activeIndex + 1)} />
+            </IconContainer>
           </>}
-        </IconContainer>
+        </IconBarContainer>
       </Row>
-      {props.data.index + 1 < props.data.length && <Divider />}
+      {props.data.index + 1 < props.data.length && <CustomPhaseItemDivider />}
     </>
   );
 };
@@ -257,6 +320,8 @@ const SubPanelContent = (props: { data: MainPanelItemCustomPhase | null, statist
             min: 0,
             max: 30,
             step: 1,
+            enableTextField: true,
+            textFieldRegExp: "^\\d*$",
             engineEventName: "C2VM.TLE.CallUpdateCustomPhaseData"
           }}
         />
@@ -270,6 +335,8 @@ const SubPanelContent = (props: { data: MainPanelItemCustomPhase | null, statist
             min: 0.1,
             max: 10,
             step: 0.1,
+            enableTextField: true,
+            textFieldRegExp: "^\\d*\\.??\\d*$",
             engineEventName: "C2VM.TLE.CallUpdateCustomPhaseData"
           }}
         />
@@ -283,6 +350,8 @@ const SubPanelContent = (props: { data: MainPanelItemCustomPhase | null, statist
             min: 0.1,
             max: 10,
             step: 0.1,
+            enableTextField: true,
+            textFieldRegExp: "^\\d*\\.??\\d*$",
             engineEventName: "C2VM.TLE.CallUpdateCustomPhaseData"
           }}
         />
@@ -296,6 +365,8 @@ const SubPanelContent = (props: { data: MainPanelItemCustomPhase | null, statist
             min: 0.1,
             max: 10,
             step: 0.1,
+            enableTextField: true,
+            textFieldRegExp: "^\\d*\\.??\\d*$",
             engineEventName: "C2VM.TLE.CallUpdateCustomPhaseData"
           }}
         />

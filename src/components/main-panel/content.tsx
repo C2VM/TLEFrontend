@@ -16,13 +16,13 @@ import Radio from '@/components/common/radio';
 import Checkbox from '@/components/common/checkbox';
 
 const Container = styled.div`
-  width: 330rem;
+  width: 18em;
   background-color: var(--panelColorNormal);
   backdrop-filter: var(--panelBlur);
   color: var(--textColor);
   flex: 1;
   position: relative;
-  padding: 6rem;
+  padding: 0.25em;
   overflow-y: scroll;
 `;
 

@@ -74,6 +74,8 @@ interface MainPanelItemRange {
   min: number,
   max: number,
   step: number,
+  enableTextField?: boolean,
+  textFieldRegExp?: string,
   engineEventName: string
 }
 
@@ -218,7 +220,8 @@ interface SubLaneGroupMask {
   m_SubLane: Entity,
   m_Position: WorldPosition,
   m_Options: number,
-  m_Vehicle: GroupMaskTurn,
+  m_Car: GroupMaskTurn,
+  m_Track: GroupMaskTurn,
   m_Pedestrian: GroupMaskSignal
 }
 

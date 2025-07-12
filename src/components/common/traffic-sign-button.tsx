@@ -7,6 +7,9 @@ const Button = styled.div`
   border-radius: 50%;
   width: 30rem;
   height: 30rem;
+  &:hover {
+    filter: brightness(1.2) contrast(1.2);
+  }
 `;
 
 export default function TrafficSignButton(props: {
@@ -67,7 +70,7 @@ export default function TrafficSignButton(props: {
     <Button onClick={props.onClick} style={props.style}>
       <svg width="100%" height="100%" viewBox="0 0 100 100">
         {props.state != "yield" && <circle cx="50" cy="50" r="45" stroke={border} strokeWidth="10" fill={backgroundColor} />}
-        {props.state == "yield" && <polygon points="50 10, 90 95, 10 95" stroke="red" strokeWidth="8" fill="white" transform="rotate(180 50 50)" />}
+        {props.state == "yield" && <polygon points="50 10, 90 95, 10 95" stroke="rgb(240, 0, 0)" strokeWidth="8" fill="rgb(240, 240, 240)" transform="rotate(180 50 50)" />}
         {props.variant != "pedestrian" && <text
           x={textX}
           y={textY}

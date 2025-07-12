@@ -8,10 +8,13 @@ const Circle = styled.div`
   border-right-color: var(--accentColorNormal);
   border-top-color: var(--accentColorNormal);
   border-radius: 50%;
-  margin: 0 10rem 0 0;
-  width: 20rem;
-  height: 20rem;
+  margin: 0 0.5em 0 0;
+  width: 1.0em;
+  height: 1.0em;
   padding: 3px;
+  &:hover {
+    filter: brightness(1.2) contrast(1.2);
+  }
 `;
 
 const Bullet = styled.div<{isChecked: boolean}>`
