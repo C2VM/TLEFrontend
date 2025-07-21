@@ -12,9 +12,6 @@ const Box = styled.div`
   width: 1.0em;
   height: 1.0em;
   padding: 1px;
-  &:hover {
-    filter: brightness(1.2) contrast(1.2);
-  }
 `;
 
 const Checkmark = styled.div<{isChecked: boolean}>`

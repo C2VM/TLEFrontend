@@ -1,6 +1,8 @@
 import { MouseEventHandler } from 'react';
 import styled from 'styled-components';
 
+import Tooltip from './tooltip';
+
 const FloatingButtonContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -28,10 +30,12 @@ const FloatingButtonImage = styled.img`
   height: 100%;
 `;
 
-export default function FloatingButton(props: {show: boolean, src: string, onClick?: MouseEventHandler<HTMLDivElement>}) {
+export default function FloatingButton(props: {show: boolean, src: string, tooltip: string, onClick?: MouseEventHandler<HTMLDivElement>}) {
   return (
-    <FloatingButtonContainer onClick={props.onClick} style={{display: props.show ? "flex" : "none"}}>
-      <FloatingButtonImage src={props.src} />
-    </FloatingButtonContainer>
+    <Tooltip position="bottom" tooltip={props.tooltip}>
+      <FloatingButtonContainer onClick={props.onClick} style={{display: props.show ? "flex" : "none"}}>
+        <FloatingButtonImage src={props.src} />
+      </FloatingButtonContainer>
+    </Tooltip>
   );
 }

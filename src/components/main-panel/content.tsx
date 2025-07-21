@@ -48,7 +48,7 @@ export default function Content(props: {items: MainPanelItem[]}) {
         }
         if (item.itemType == "radio") {
           return (
-            <Row data={item}>
+            <Row data={item} hoverEffect={true}>
               <Radio {...item} />
               <Label>{getString(locale, item.label)}</Label>
             </Row>
@@ -56,7 +56,7 @@ export default function Content(props: {items: MainPanelItem[]}) {
         }
         if (item.itemType == "checkbox") {
           return (
-            <Row data={item}>
+            <Row data={item} hoverEffect={true}>
               <Checkbox {...item} />
               <Label>{getString(locale, item.label)}</Label>
             </Row>

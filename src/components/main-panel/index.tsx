@@ -4,19 +4,13 @@ import styled from 'styled-components';
 import engine from 'cohtml/cohtml';
 import { bindValue, useValue } from 'cs2/api';
 
+import { MainPanelState } from '@/constants';
+
 import Header from './header';
 import Content from './content';
 
-import CustomPhaseContent from '@/components/custom-phase-tool/main-panel';
-
 import FloatingButton from '@/components/common/floating-button';
-
-const enum MainPanelState {
-  Hidden = 0,
-  Empty = 1,
-  Main = 2,
-  CustomPhase = 3,
-}
+import CustomPhaseMainPanel from '@/components/custom-phase-tool/main-panel';
 
 const defaultPanel = {
   title: "",
@@ -135,7 +129,11 @@ export default function MainPanel() {
         display: showPanel ? "block" : "none"
       };
       if (toolLayout && toolLayout.clientHeight > 0) {
-        result.maxHeight = toolLayout.clientHeight - top;
+        let panelTop = top;
+        if (panelTop < 0 && containerRef.current) {
+          panelTop = containerRef.current.offsetTop;
+        }
+        result.maxHeight = toolLayout.clientHeight - panelTop;
         if (result.maxHeight < 200) {
           result.maxHeight = 200;
         }
@@ -149,7 +147,7 @@ export default function MainPanel() {
         }
       }
       return result;
-    }, [showPanel, top, left, toolLayout, containerRef]
+    }, [showPanel, top, left, toolLayout, containerRef.current, panel]
   );
 
   return (
@@ -157,15 +155,16 @@ export default function MainPanel() {
       <FloatingButton
         show={showFloatingButton}
         src="Media/Game/Icons/TrafficLights.svg"
+        tooltip={panel.title}
         onClick={floatingButtonClickHandler}
       />
       <Container
         ref={containerRef}
         style={style}
       >
-        <Header onMouseDown={mouseDownHandler} {...panel} />
+        <Header title={panel.title} image={panel.image} onMouseDown={mouseDownHandler} />
         {panel.state != MainPanelState.CustomPhase && <Content items={panel.items} />}
-        {panel.state == MainPanelState.CustomPhase && <CustomPhaseContent items={panel.items} />}
+        {panel.state == MainPanelState.CustomPhase && <CustomPhaseMainPanel items={panel.items} />}
       </Container>
     </>
   );

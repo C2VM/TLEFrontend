@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 import { bindValue, call, useValue } from "cs2/api";
 
-import { EdgeGroupMaskOptions } from "./consts";
+import { EdgeGroupMaskOptions } from "@/constants";
 
 import EdgePanel from "./edge-panel";
 import SubLanePanel from "./sublane-panel";

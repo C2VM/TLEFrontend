@@ -5,7 +5,7 @@ import { call } from 'cs2/api';
 
 import { CityConfigurationContext } from '@/context';
 
-import { EdgeGroupMaskOptions } from "./consts";
+import { EdgeGroupMaskOptions } from "@/constants";
 
 import Lane from './lane';
 import LinkVariantOff from '@/components/common/icons/link-variant-off';
@@ -13,6 +13,7 @@ import LinkVariantOff from '@/components/common/icons/link-variant-off';
 const Container = styled.div`
   position: fixed;
   transform: translate(-50%);
+  margin: -10rem 0 0 -10rem;
   z-index: -1;
 `;
 

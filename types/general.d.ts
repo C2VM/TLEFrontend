@@ -74,6 +74,7 @@ interface MainPanelItemRange {
   min: number,
   max: number,
   step: number,
+  defaultValue: number,
   enableTextField?: boolean,
   textFieldRegExp?: string,
   engineEventName: string
@@ -97,12 +98,14 @@ interface MainPanelItemCustomPhase {
   targetDuration: number,
   priority: number,
   minimumDuration: number,
+  maximumDuration: number,
   targetDurationMultiplier: number,
   laneOccupiedMultiplier: number,
   intervalExponent: number,
   prioritiseTrack: boolean,
   prioritisePublicCar: boolean,
   prioritisePedestrian: boolean,
+  linkedWithNextPhase: boolean,
 }
 
 interface WorldPosition {
@@ -119,38 +122,6 @@ interface ScreenPoint {
 
 interface ScreenPointMap {
   [key: string]: ScreenPoint
-}
-
-interface LaneDirectionTool {
-  buttons: LaneToolButton[],
-  panels: LaneDirectionToolPanel[]
-}
-
-interface LaneToolButton {
-  image: string,
-  visible: boolean,
-  position: WorldPosition,
-  engineEventName: string
-}
-
-interface LaneDirectionToolPanel {
-  title: string,
-  image: string,
-  visible: boolean,
-  position: WorldPosition,
-  lanes: LaneDirection[],
-  items: MainPanelItemButton[]
-}
-
-interface LaneDirection {
-  itemType: "lane",
-  position: WorldPosition,
-  leftHandTraffic: boolean,
-  label: string,
-  banLeft: boolean,
-  banRight: boolean,
-  banStraight: boolean,
-  banUTurn: boolean
 }
 
 interface CityConfiguration {

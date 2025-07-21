@@ -30,7 +30,7 @@ const HeaderTitle = styled.div`
 
 export default function Header(props: {title: string, image: string, onMouseDown?: MouseEventHandler<HTMLDivElement>}) {
   return (
-    <Container {...props}>
+    <Container onMouseDown={props.onMouseDown}>
         <HeaderImage src={props.image} />
         <HeaderTitle>{props.title}</HeaderTitle>
     </Container>

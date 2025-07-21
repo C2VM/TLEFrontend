@@ -10,6 +10,7 @@ import Range from '@/components/common/range';
 
 import Check from '@/components/common/icons/check';
 import Edit from '@/components/common/icons/edit';
+import ResetSettings from '@/components/common/icons/reset-settings';
 
 import TitleDim from './title-dim';
 
@@ -22,7 +23,7 @@ const Gap = styled.div`
 `;
 
 const IconContainer = styled.div<{disabled?: boolean}>`
-  margin-left: 0.2em;
+  margin-left: 0.25em;
   border-radius: 0.2em;
   &:hover {
     filter: ${props => props.disabled ? "none" : "brightness(1.2) contrast(1.2)"};
@@ -86,6 +87,10 @@ export default function MainPanelRange(props: {data: MainPanelItemRange}) {
       submitTextField();
     }
   };
+  const resetHandler = () => {
+    setTextFieldActive(false);
+    changeHandler(props.data.defaultValue);
+  };
   useEffect(() => {
     setValue(props.data.value);
   }, [props.data.value]);
@@ -98,6 +103,7 @@ export default function MainPanelRange(props: {data: MainPanelItemRange}) {
           {textFieldActive && <IconContainer><Check style={IconStyle} onClick={submitTextField} /></IconContainer>}
           {!textFieldActive && <IconContainer><Edit style={IconStyle} onClick={enableTextField} /></IconContainer>}
         </>}
+        <IconContainer><ResetSettings style={IconStyle} onClick={resetHandler} /></IconContainer>
       </TitleContainer>
       <Gap />
       <Range data={props.data} onChange={changeHandler} onUpdate={updateHandler} />

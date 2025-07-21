@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { call } from 'cs2/api';
 
-import { EdgeGroupMaskOptions } from "./consts";
+import { EdgeGroupMaskOptions } from "@/constants";
 
 import Lane from './lane';
 import LinkVariant from '@/components/common/icons/link-variant';
@@ -11,6 +11,7 @@ import LinkVariant from '@/components/common/icons/link-variant';
 const Container = styled.div<{translateY: string}>`
   position: fixed;
   transform: translate(-50%, ${props => props.translateY});
+  margin: -10rem 0 0 -10rem;
   z-index: -1;
 `;
 
