@@ -1,6 +1,8 @@
+import { CSSProperties } from "react";
 import styled from "styled-components";
 
 import Button from "@/components/common/button";
+import Scrollable from "@/components/common/scrollable";
 import Divider from "@/components/main-panel/items/divider";
 import Row from "@/components/main-panel/items/row";
 
@@ -35,17 +37,13 @@ const RightPanelContainer = styled.div`
   flex: 1;
   position: relative;
   padding: 0.25em;
-  overflow-y: scroll;
 `;
 
-const ItemContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: auto;
-  overflow-y: scroll;
-`;
+const ItemContainerStyle: CSSProperties = {
+  display: "flex",
+  flexDirection: "column",
+  flex: 1,
+};
 
 const AddButton = () => {
   const data: MainPanelItemButton = {
@@ -95,16 +93,18 @@ export default function MainPanel(props: {items: MainPanelItem[]}) {
   return (
     <Container>
       <LeftPanelContainer>
-        <ItemContainer>
+        <Scrollable style={{flex: 1}} contentStyle={ItemContainerStyle}>
           {props.items.map(item => item.itemType == "customPhase" && <Item data={item} />)}
-        </ItemContainer>
+        </Scrollable>
         {length > 0 && <Divider />}
         {length < 16 && <AddButton />}
         <SaveButton />
       </LeftPanelContainer>
       <RightPanelContainer>
-        {activeItem && <SubPanel data={activeItem.itemType == "customPhase" ? activeItem : null} />}
-        {!activeItem && currentItem && <SubPanel data={currentItem.itemType == "customPhase" ? currentItem : null} statisticsOnly={true} />}
+        <Scrollable style={{flex: 1}} contentStyle={{flex: 1}} trackStyle={{marginLeft: "0.25em"}}>
+          {activeItem && <SubPanel data={activeItem.itemType == "customPhase" ? activeItem : null} />}
+          {!activeItem && currentItem && <SubPanel data={currentItem.itemType == "customPhase" ? currentItem : null} statisticsOnly={true} />}
+        </Scrollable>
       </RightPanelContainer>
     </Container>
   );

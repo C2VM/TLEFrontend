@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import engine from 'cohtml/cohtml';
@@ -71,7 +71,7 @@ export default function MainPanel() {
       setTop(panel.position.top);
       setLeft(panel.position.left);
     }
-  }, [panel, panel.showPanel, panel.showFloatingButton, panel.position.top, panel.position.left]);
+  }, [panel, panel.showPanel, panel.showFloatingButton, panel.position.top, panel.position.left, dragging]);
 
   // Save everything when the panel is closed
   useEffect(() => {
@@ -99,14 +99,14 @@ export default function MainPanel() {
       setDragging(true);
     }
   };
-  const mouseUpHandler = (_event: MouseEvent) => {
+  const mouseUpHandler = useCallback((_event: MouseEvent) => {
     if (dragging && containerRef.current && toolLayout) {
       const rect = containerRef.current.getBoundingClientRect();
       const tlRect = toolLayout.getBoundingClientRect();
       engine.call("C2VM.TLE.CallMainPanelUpdatePosition", JSON.stringify({top: Math.floor(rect.top - tlRect.top), left: Math.floor(rect.left - tlRect.left)}));
     }
     setDragging(false);
-  };
+  }, [dragging, toolLayout]);
   const mouseMoveHandler = (event: MouseEvent) => {
     setTop((prev) => prev + event.movementY);
     setLeft((prev) => prev + event.movementX);
@@ -121,7 +121,7 @@ export default function MainPanel() {
         document.body.removeEventListener("mousemove", mouseMoveHandler);
       };
     }
-  }, [dragging]);
+  }, [dragging, mouseUpHandler]);
 
   const style: React.CSSProperties = useMemo(
     () => {
@@ -147,7 +147,7 @@ export default function MainPanel() {
         }
       }
       return result;
-    }, [showPanel, top, left, toolLayout, containerRef.current, panel]
+    }, [showPanel, top, left, toolLayout, containerRef, panel]
   );
 
   return (

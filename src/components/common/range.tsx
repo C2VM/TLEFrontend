@@ -98,7 +98,7 @@ export default function Range(props: {
 
   useEffect(() => {
     if (!dragging) {
-      if (data.value < data.min) {
+      if (data.value < data.min || isNaN(data.value)) {
         setValue(data.min);
       } else if (data.value > data.max) {
         setValue(data.max);
@@ -106,7 +106,7 @@ export default function Range(props: {
         setValue(data.value);
       }
     }
-  }, [data]);
+  }, [data, dragging]);
 
   const sliderValue = (value - data.min) / (data.max - data.min) * 100;
 

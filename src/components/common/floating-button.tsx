@@ -32,7 +32,7 @@ const FloatingButtonImage = styled.img`
 
 export default function FloatingButton(props: {show: boolean, src: string, tooltip: string, onClick?: MouseEventHandler<HTMLDivElement>}) {
   return (
-    <Tooltip position="bottom" tooltip={props.tooltip}>
+    <Tooltip position="bottom-start" tooltip={props.tooltip} tooltipStyle={{marginTop: 0}}>
       <FloatingButtonContainer onClick={props.onClick} style={{display: props.show ? "flex" : "none"}}>
         <FloatingButtonImage src={props.src} />
       </FloatingButtonContainer>
