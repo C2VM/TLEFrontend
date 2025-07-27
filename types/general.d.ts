@@ -106,6 +106,7 @@ interface MainPanelItemCustomPhase {
   prioritisePublicCar: boolean,
   prioritisePedestrian: boolean,
   linkedWithNextPhase: boolean,
+  endPhasePrematurely: boolean,
 }
 
 interface WorldPosition {

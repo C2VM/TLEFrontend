@@ -1,9 +1,12 @@
 import { useContext } from "react";
 import styled from "styled-components";
 
+import { call } from "cs2/api";
+
 import { LocaleContext } from "@/context";
 import { getString } from "@/localisations";
 
+import Button from "@/components/common/button";
 import Checkbox from "@/components/common/checkbox";
 import Tooltip from "@/components/common/tooltip";
 import TooltipIcon from "@/components/common/tooltip-icon";
@@ -36,6 +39,23 @@ const ItemTitle = (props: {title: string, secondaryText?: string, tooltip?: Reac
           <TooltipIcon style={{marginLeft: "0.25em"}} />
         </Tooltip>
       </>}
+    </Row>
+  );
+};
+
+const EndPhaseButton = (props: {index: number, disabled?: boolean}) => {
+  const clickHandler = () => {
+    if (!props.disabled) {
+      call("C2VM.TLE", "CallUpdateCustomPhaseData", JSON.stringify({key: "EndPhasePrematurely", index: props.index}));
+    }
+  };
+  return (
+    <Row hoverEffect={!props.disabled}>
+      <Button
+        label={props.disabled ? "PhaseEndRequested" : "EndPhasePrematurely"}
+        disabled={props.disabled}
+        onClick={clickHandler}
+      />
     </Row>
   );
 };
@@ -182,6 +202,7 @@ export default function SubPanel(props: {data: MainPanelItemCustomPhase | null, 
       <ItemTitle title="CarFlow" secondaryText={`${Round(data.carFlow)}`} dim={true} />
       <ItemTitle title="LanesOccupied" secondaryText={`${data.carLaneOccupied}, ${data.publicCarLaneOccupied}, ${data.trackLaneOccupied}, ${data.pedestrianLaneOccupied}`} dim={true} />
       <ItemTitle title="WeightedWaiting" secondaryText={`${Round(data.weightedWaiting)}`} dim={true} />
+      {data.activeIndex < 0 && <EndPhaseButton index={data.index} disabled={data.endPhasePrematurely} />}
     </>
   );
 }

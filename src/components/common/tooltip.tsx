@@ -67,14 +67,16 @@ export default function Tooltip(props: {position: "bottom" | "bottom-start" | "r
     }
   };
   return (
-    <Container ref={containerRef} onMouseEnter={showTooltip} onMouseLeave={() => setShow(false)}>
-      {props.children}
+    <>
+      <Container ref={containerRef} onMouseEnter={showTooltip} onMouseLeave={() => setShow(false)}>
+        {props.children}
+      </Container>
       {show && createPortal(
         <TooltipContainer show={show} style={{left, top, ...tooltipStyle, ...props.tooltipStyle}}>
           {props.tooltip}
         </TooltipContainer>,
         document.body
       )}
-    </Container>
+    </>
   );
 }
