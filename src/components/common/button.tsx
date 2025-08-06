@@ -11,8 +11,9 @@ const ButtonComponent = styled.div<{disabled?: boolean}>`
   background-color: var(--toolbarFieldColor);
   flex: 1;
   text-align: center;
+  ${props => props.disabled ? "filter: brightness(1.0) contrast(0.6);" : ""}
   &:hover {
-    filter: ${props => props.disabled ? "none" : "brightness(1.2) contrast(1.2)"};
+    ${props => props.disabled ? "" : "filter: brightness(1.2) contrast(1.2);"}
   }
 `;
 

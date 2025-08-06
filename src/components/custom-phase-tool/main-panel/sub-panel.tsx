@@ -202,7 +202,7 @@ export default function SubPanel(props: {data: MainPanelItemCustomPhase | null, 
       <ItemTitle title="CarFlow" secondaryText={`${Round(data.carFlow)}`} dim={true} />
       <ItemTitle title="LanesOccupied" secondaryText={`${data.carLaneOccupied}, ${data.publicCarLaneOccupied}, ${data.trackLaneOccupied}, ${data.pedestrianLaneOccupied}`} dim={true} />
       <ItemTitle title="WeightedWaiting" secondaryText={`${Round(data.weightedWaiting)}`} dim={true} />
-      {data.activeIndex < 0 && <EndPhaseButton index={data.index} disabled={data.endPhasePrematurely} />}
+      {data.activeIndex < 0 && data.manualSignalGroup <= 0 && data.currentSignalGroup == data.index + 1 && <EndPhaseButton index={data.index} disabled={data.endPhasePrematurely} />}
     </>
   );
 }

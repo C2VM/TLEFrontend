@@ -1,4 +1,4 @@
-import { CSSProperties, useRef, useState } from "react";
+import { CSSProperties, useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
 
@@ -42,8 +42,9 @@ export default function Tooltip(props: {position: "bottom" | "bottom-start" | "r
   const [left, setLeft] = useState(0);
   const [top, setTop] = useState(0);
   const [tooltipStyle, setTooltipStyle] = useState<CSSProperties>({});
-  const showTooltip = () => {
-    if (containerRef.current) {
+
+  const showTooltip = useCallback(() => {
+    if (containerRef.current && !show) {
       const element = containerRef.current;
       const rect = element.getBoundingClientRect();
       if (props.position == "bottom") {
@@ -65,10 +66,31 @@ export default function Tooltip(props: {position: "bottom" | "bottom-start" | "r
       }
       setShow(true);
     }
-  };
+  }, [containerRef, show, props.position]);
+
+  const hideTooltip = useCallback(() => {
+    setShow(false);
+  }, []);
+
+  // Workaround for mouseleave not firing reliably
+  useEffect(() => {
+    if (containerRef.current && show) {
+      const mouseMoveHandler = (e: MouseEvent) => {
+        if (containerRef.current) {
+          const rect = containerRef.current.getBoundingClientRect();
+          if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
+            hideTooltip();
+          }
+        }
+      };
+      document.body.addEventListener("mousemove", mouseMoveHandler);
+      return () => document.body.removeEventListener("mousemove", mouseMoveHandler);
+    }
+  }, [containerRef, show, hideTooltip]);
+
   return (
     <>
-      <Container ref={containerRef} onMouseEnter={showTooltip} onMouseLeave={() => setShow(false)}>
+      <Container ref={containerRef} onMouseEnter={showTooltip} onMouseLeave={hideTooltip}>
         {props.children}
       </Container>
       {show && createPortal(
