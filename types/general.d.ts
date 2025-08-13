@@ -212,3 +212,8 @@ interface SubLaneInfo {
   m_PedestrianLaneCount: number,
   m_SubLaneGroupMask: SubLaneGroupMask
 }
+
+interface ToolTooltipMessage {
+  image: string,
+  message: string
+}

@@ -11,6 +11,7 @@ import Content from './content';
 
 import FloatingButton from '@/components/common/floating-button';
 import CustomPhaseMainPanel from '@/components/custom-phase-tool/main-panel';
+import ToolTooltip from '@/components/tool-tooltip';
 
 const defaultPanel = {
   title: "",
@@ -165,6 +166,7 @@ export default function MainPanel() {
         <Header title={panel.title} image={panel.image} onMouseDown={mouseDownHandler} />
         {panel.state != MainPanelState.CustomPhase && <Content items={panel.items} />}
         {panel.state == MainPanelState.CustomPhase && <CustomPhaseMainPanel items={panel.items} />}
+        {panel.state == MainPanelState.Empty && <ToolTooltip />}
       </Container>
     </>
   );
