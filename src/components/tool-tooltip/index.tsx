@@ -59,7 +59,7 @@ export default function ToolTooltip() {
 
   return (
     <>
-      {tooltipMessage.length > 0 && createPortal(
+      {tooltipMessage.length > 0 && top > 0 && createPortal(
         <Container style={{transform: "translate(" + left + "px, " + top + "px)"}}>
           {tooltip}
         </Container>,

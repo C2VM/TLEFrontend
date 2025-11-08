@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 import { call } from "cs2/api";
 
+import { MainPanelState } from "@/constants";
+
 import Button from "@/components/common/button";
 import Scrollable from "@/components/common/scrollable";
 import Divider from "@/components/main-panel/items/divider";
@@ -67,7 +69,7 @@ const BackButton = () => {
     itemType: "button",
     type: "button",
     key: "state",
-    value: "2",
+    value: `${MainPanelState.Main}`,
     label: "Back",
     engineEventName: "C2VM.TLE.CallSetMainPanelState"
   };
